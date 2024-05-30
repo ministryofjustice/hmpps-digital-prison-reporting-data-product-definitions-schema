@@ -50,6 +50,10 @@
         "id": { "type": "string" },
         "name": { "type": "string" },
         "datasource": { "type": "string" },
+        "parameters": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/dataset-parameter" }
+        },
         "query": { "type": "string" },
         "schema": {
           "type": "object",
@@ -76,6 +80,21 @@
         "sensitivity": { "$ref": "#/definitions/sensitivity" },
         "alias": { "$ref": "#/definitions/alias" },
         "tags": { "$ref": "#/definitions/tags" },
+        "type": { "enum": ["null", "boolean", "int", "long", "float", "double", "bytes", "string", "date", "time", "datetime", "timestamp"] }
+      },
+      "additionalProperties": false
+    },
+
+    "dataset-parameter": {
+      "type": "object",
+      "required": ["name", "display","type"],
+      "properties": {
+        "default": { },
+        "description": { "type": "string" },
+        "display": { "type": "string" },
+        "index": { "type": "integer" },
+        "name": { "type": "string" },
+        "mandatory": { "enum": ["true", "false"] },
         "type": { "enum": ["null", "boolean", "int", "long", "float", "double", "bytes", "string", "date", "time", "datetime", "timestamp"] }
       },
       "additionalProperties": false
