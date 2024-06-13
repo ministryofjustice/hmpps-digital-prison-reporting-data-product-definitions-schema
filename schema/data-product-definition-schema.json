@@ -49,6 +49,7 @@
       "properties": {
         "id": { "type": "string" },
         "name": { "type": "string" },
+        "description": { "type": "string" },
         "datasource": { "type": "string" },
         "parameters": {
           "type": "array",
@@ -116,7 +117,8 @@
       "properties": {
         "author": { "type": "string" },
         "version": { "type": "string" },
-        "owner": { "type": "string" }
+        "owner": { "type": "string" },
+        "tags": { "$ref": "#/definitions/tags" }
       },
       "additionalProperties": false
     },
@@ -231,7 +233,7 @@
       "type": "object",
       "required": ["template", "field"],
       "properties": {
-        "template": { "enum": ["list"] },
+        "template": { "enum": ["list", "list-section", "list-aggregate"] },
         "field": {
           "type": "array",
           "items": { "$ref": "#/definitions/report-field" }
