@@ -39,8 +39,11 @@
       "properties": {
         "id": { "type": "string" },
         "name": { "type": "string" },
-        "connection": { "type": "string" }
-      }
+        "connection": { "type": "string" },
+        "database": { "type": "string" },
+        "catalog": { "type": "string" }
+      },
+      "additionalProperties": true
     },
 
     "dataset": {
