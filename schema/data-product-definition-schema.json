@@ -236,7 +236,7 @@
       "type": "object",
       "required": ["template", "field"],
       "properties": {
-        "template": { "enum": ["list", "list-section", "list-aggregate"] },
+        "template": { "enum": ["list", "list-section", "list-aggregate", "list-tab"] },
         "field": {
           "type": "array",
           "items": { "$ref": "#/definitions/report-field" }
