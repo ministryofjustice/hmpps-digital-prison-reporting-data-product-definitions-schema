@@ -76,6 +76,7 @@
       "type": "object",
       "required": ["name", "type"],
       "properties": {
+        "index": { "type": "integer"},
         "description": { "type": "string" },
         "glossaryindex": { "type": "string" },
         "name": { "type": "string" },
@@ -86,7 +87,7 @@
         "tags": { "$ref": "#/definitions/tags" },
         "type": { "enum": ["null", "boolean", "int", "long", "float", "double", "bytes", "string", "date", "time", "datetime", "timestamp"] }
       },
-      "additionalProperties": false
+      "additionalProperties": true
     },
 
     "dataset-parameter": {
