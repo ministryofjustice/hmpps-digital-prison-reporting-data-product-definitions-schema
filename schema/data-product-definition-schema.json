@@ -239,6 +239,10 @@
       "required": ["template", "field"],
       "properties": {
         "template": { "enum": ["list", "list-section", "list-aggregate", "list-tab", "crosstab", "summary"] },
+        "section": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
         "field": {
           "type": "array",
           "items": { "$ref": "#/definitions/report-field" }
