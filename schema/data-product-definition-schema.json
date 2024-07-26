@@ -76,6 +76,7 @@
       "type": "object",
       "required": ["name", "type"],
       "properties": {
+        "index": { "type": "integer" },
         "description": { "type": "string" },
         "glossaryindex": { "type": "string" },
         "name": { "type": "string" },
@@ -86,12 +87,12 @@
         "tags": { "$ref": "#/definitions/tags" },
         "type": { "enum": ["null", "boolean", "int", "long", "float", "double", "bytes", "string", "date", "time", "datetime", "timestamp"] }
       },
-      "additionalProperties": false
+      "additionalProperties": true
     },
 
     "dataset-parameter": {
       "type": "object",
-      "required": ["name", "display","type"],
+      "required": ["name", "display","reportFieldType"],
       "properties": {
         "default": { },
         "description": { "type": "string" },
@@ -99,9 +100,10 @@
         "index": { "type": "integer" },
         "name": { "type": "string" },
         "mandatory": { "enum": ["true", "false"] },
-        "type": { "enum": ["null", "boolean", "int", "long", "float", "double", "bytes", "string", "date", "time", "datetime", "timestamp"] }
+        "filterType": { "type": "string" },
+        "reportFieldType": { "enum": ["null", "boolean", "int", "long", "float", "double", "bytes", "string", "date", "time", "datetime", "timestamp"] }
       },
-      "additionalProperties": false
+      "additionalProperties": true
     },
 
     "filter": {
@@ -227,11 +229,25 @@
         "withdrawn": { "type": "string" },
         "version": { "type": "string" },
         "dataset": { "type": "string" },
+        "filter": { "$ref": "#/definitions/report-filter" },
         "render": { "type": "string" },
         "classification": { "type": "string" },
         "policy": { "type": "array", "items": { "$ref": "#/definitions/policy" } },
         "specification": { "$ref": "#/definitions/report-specification" },
         "summary": { "type": "array", "items": { "$ref": "#/definitions/report-summary" } }
+      }
+    },
+
+    "report-filter": {
+      "type": "object",
+      "required": ["name", "query"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "database": { "type": "string" },
+        "version": { "type": "string" },
+        "query": { "type": "string" }
       }
     },
 
