@@ -114,7 +114,10 @@
         "default": { "type": "string" },
         "pattern": { "type": "string" },
         "mandatory": { "type": "boolean" },
-        "staticoptions": { "$ref": "#/definitions/static-options" }
+        "staticoptions": { "$ref": "#/definitions/static-options" },
+        "dynamicOptions": {"$ref": "#/definitions/dynamic-options" },
+        "min": { "type": "string" },
+        "max": { "type": "string" }
       }
     },
 
@@ -301,6 +304,19 @@
           "display": { "type": "string" }
         },
         "additionalProperties": false
+      }
+    },
+
+    "dynamic-options": {
+      "type": "object",
+      "required": ["returnAsStaticOptions"],
+      "properties": {
+        "minimumLength": { "type": "integer" },
+        "returnAsStaticOptions": { "type": "boolean" },
+        "maximumOptions": { "type": "integer" },
+        "dataset": { "type": "string" },
+        "name": { "type": "string" },
+        "display": { "type": "string" }
       }
     },
 
