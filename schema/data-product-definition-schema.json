@@ -327,7 +327,7 @@
       "properties": {
         "id": { "type": "string" },
         "dataset": { "type": "string" },
-        "template": { "enum": ["table-header", "table-footer", "section-footer", "page-header", "page-footer"] }
+        "template": { "enum": ["table-header", "table-footer", "section-header", "section-footer", "page-header", "page-footer"] }
       }
     }
   }
