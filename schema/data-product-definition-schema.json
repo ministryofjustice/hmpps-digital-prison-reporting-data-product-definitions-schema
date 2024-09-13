@@ -18,6 +18,14 @@
       "type": "array",
       "items": { "$ref": "#/definitions/dataset" }
     },
+    "dashboards": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/dashboard" }
+    },
+    "metrics": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/metric" }
+    },
     "policy": {
       "type": "array",
       "items": { "$ref": "#/definitions/policy" }
@@ -104,6 +112,53 @@
         "reportFieldType": { "enum": ["null", "boolean", "int", "long", "float", "double", "bytes", "string", "date", "time", "datetime", "timestamp"] }
       },
       "additionalProperties": true
+    },
+
+    "dashboard": {
+      "type": "object",
+      "required": ["id", "name", "description", "metrics"],
+      "id": "string",
+      "name": "string",
+      "description": "string",
+      "metrics": {
+        "type": "array",
+        "items": { "$ref": "#/definitions/metric-definition-summary" }
+      }
+    },
+
+    "metric-definition-summary": {
+      "type": "object",
+      "required": ["id", "visualisationType"],
+      "id": "string",
+      "visualisationType":  {
+        "type": "array",
+        "items": { "type": "string" }
+      }
+    },
+
+    "metric": {
+      "type": "object",
+      "required": ["id", "name", "dataset", "display", "description", "visualisationType", "specification"],
+      "id": "string",
+      "name": "string",
+      "dataset": "string",
+      "display": "string",
+      "description": "string",
+      "visualisationType":  {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "specification": {
+        "type": "array",
+        "items": { "$ref": "#/definitions/metric-specification" }
+      }
+    },
+    "metric-specification": {
+      "type": "object",
+      "required": ["name", "display", "unit"],
+      "name": "string",
+      "display": "string",
+      "unit": "string"
     },
 
     "filter": {
