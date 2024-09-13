@@ -155,7 +155,7 @@
     },
     "metric-specification": {
       "type": "object",
-      "required": ["name", "display", "unit"],
+      "required": ["name", "display"],
       "name": "string",
       "display": "string",
       "unit": "string"
