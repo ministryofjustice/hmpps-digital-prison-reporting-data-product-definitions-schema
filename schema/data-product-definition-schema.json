@@ -133,7 +133,10 @@
       "required": ["id", "visualisationType"],
       "properties": {
         "id":  { "type": "string" },
-        "visualisationType": { "enum": ["doughnut","bar","line"] }
+        "visualisationType": {
+          "type": "array",
+          "items":  { "enum": ["doughnut","bar","line"] }
+          }
         }
       },
 
@@ -146,7 +149,10 @@
         "dataset": { "type": "string" },
         "display": { "type": "string" },
         "description": { "type": "string" },
-        "visualisationType": { "enum": ["doughnut","bar","line"] },
+        "visualisationType": {
+          "type": "array",
+          "items":  { "enum": ["doughnut","bar","line"] }
+        },
         "specification": {
           "type": "array",
           "items": {
