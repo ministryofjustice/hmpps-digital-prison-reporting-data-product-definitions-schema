@@ -117,48 +117,50 @@
     "dashboard": {
       "type": "object",
       "required": ["id", "name", "description", "metrics"],
-      "id": "string",
-      "name": "string",
-      "description": "string",
-      "metrics": {
-        "type": "array",
-        "items": { "$ref": "#/definitions/dashboard-metric-definition" }
+      "properties": {
+        "id":  { "type": "string" },
+        "name":  { "type": "string" },
+        "description":  { "type": "string" },
+        "metrics": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/dashboard-metric-definition" }
+        }
       }
     },
 
     "dashboard-metric-definition": {
       "type": "object",
       "required": ["id", "visualisationType"],
-      "id": "string",
-      "visualisationType":  {
-        "type": "array",
-        "items": { "type": "string" }
-      }
-    },
+      "properties": {
+        "id":  { "type": "string" },
+        "visualisationType": { "enum": ["doughnut","bar","line"] }
+        }
+      },
 
     "metric": {
       "type": "object",
       "required": ["id", "name", "dataset", "display", "description", "visualisationType", "specification"],
-      "id": "string",
-      "name": "string",
-      "dataset": "string",
-      "display": "string",
-      "description": "string",
-      "visualisationType":  {
-        "type": "array",
-        "items": { "type": "string" }
-      },
-      "specification": {
-        "type": "array",
-        "items": { "$ref": "#/definitions/metric-specification" }
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "dataset": { "type": "string" },
+        "display": { "type": "string" },
+        "description": { "type": "string" },
+        "visualisationType": { "enum": ["doughnut","bar","line"] },
+        "specification": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/metric-specification"
+          }
+        }
       }
     },
     "metric-specification": {
       "type": "object",
       "required": ["name", "display"],
-      "name": "string",
-      "display": "string",
-      "unit": "string"
+      "name": { "type": "string" },
+      "display": { "type": "string" },
+      "unit": { "type": "string" }
     },
 
     "filter": {
