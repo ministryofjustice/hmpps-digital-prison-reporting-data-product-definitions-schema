@@ -158,9 +158,11 @@
     "metric-specification": {
       "type": "object",
       "required": ["name", "display"],
-      "name": { "type": "string" },
-      "display": { "type": "string" },
-      "unit": { "type": "string" }
+      "properties": {
+        "name": {"type": "string"},
+        "display": {"type": "string"},
+        "unit": {"type": "string"}
+      }
     },
 
     "filter": {
