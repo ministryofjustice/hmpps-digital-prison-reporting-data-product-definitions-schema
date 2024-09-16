@@ -122,11 +122,11 @@
       "description": "string",
       "metrics": {
         "type": "array",
-        "items": { "$ref": "#/definitions/metric-definition-summary" }
+        "items": { "$ref": "#/definitions/dashboard-metric-definition" }
       }
     },
 
-    "metric-definition-summary": {
+    "dashboard-metric-definition": {
       "type": "object",
       "required": ["id", "visualisationType"],
       "id": "string",
