@@ -130,29 +130,21 @@
 
     "dashboard-metric-definition": {
       "type": "object",
-      "required": ["id", "visualisationType"],
+      "required": ["id"],
       "properties": {
-        "id":  { "type": "string" },
-        "visualisationType": {
-          "type": "array",
-          "items":  { "enum": ["doughnut","bar","line"] }
-          }
+        "id":  { "type": "string" }
         }
       },
 
     "metric": {
       "type": "object",
-      "required": ["id", "name", "dataset", "display", "description", "visualisationType", "specification"],
+      "required": ["id", "name", "dataset", "display", "description", "specification"],
       "properties": {
         "id": { "type": "string" },
         "name": { "type": "string" },
         "dataset": { "type": "string" },
         "display": { "type": "string" },
         "description": { "type": "string" },
-        "visualisationType": {
-          "type": "array",
-          "items":  { "enum": ["doughnut","bar","line"] }
-        },
         "specification": {
           "type": "array",
           "items": {
@@ -167,7 +159,12 @@
       "properties": {
         "name": {"type": "string"},
         "display": {"type": "string"},
-        "unit": {"type": "string"}
+        "unit": {"type": "string"},
+        "group": {"type":  "boolean"},
+        "chart": {
+          "type": "array",
+          "items":  { "enum": ["doughnut","bar","line"] }
+        }
       }
     },
 
