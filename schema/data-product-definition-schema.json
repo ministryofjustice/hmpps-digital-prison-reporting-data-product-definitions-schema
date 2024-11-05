@@ -400,7 +400,9 @@
 
     "summary-field": {
       "type": "object",
+      "required": ["name"],
       "properties": {
+        "name": { "type": "string" },
         "header": { "type": "boolean" },
         "mergeRows": { "type": "boolean" },
         "sortAsc": { "type": "boolean" }
