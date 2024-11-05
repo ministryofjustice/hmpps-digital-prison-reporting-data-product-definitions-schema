@@ -320,7 +320,7 @@
       "type": "object",
       "required": ["template", "field"],
       "properties": {
-        "template": { "enum": ["list", "list-section", "list-aggregate", "list-tab", "crosstab", "summary", "summary-section"] },
+        "template": { "enum": ["list", "list-section", "list-tab", "summary", "summary-section"] },
         "section": {
           "type": "array",
           "items": { "type": "string" }
@@ -346,7 +346,8 @@
         "wordwrap": { "enum": ["none", "normal", "break-words"] },
         "alias": { "$ref": "#/definitions/alias" },
         "filter": { "$ref": "#/definitions/filter" },
-        "type": { "enum": ["boolean", "int", "long", "float", "double", "string", "date", "time", "datetime", "timestamp"] }
+        "type": { "enum": ["boolean", "int", "long", "float", "double", "string", "date", "time", "datetime", "timestamp"] },
+        "header": { "type": "boolean" }
       },
       "additionalProperties": true
     },
@@ -389,7 +390,22 @@
       "properties": {
         "id": { "type": "string" },
         "dataset": { "type": "string" },
-        "template": { "enum": ["table-header", "table-footer", "section-header", "section-footer", "page-header", "page-footer"] }
+        "template": { "enum": ["table-header", "table-footer", "section-header", "section-footer", "page-header", "page-footer"] },
+        "field": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/summary-field" }
+        }
+      }
+    },
+
+    "summary-field": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "header": { "type": "boolean" },
+        "mergeRows": { "type": "boolean" },
+        "sortAsc": { "type": "boolean" }
       }
     }
   }
