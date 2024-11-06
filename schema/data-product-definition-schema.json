@@ -33,6 +33,10 @@
     "report": {
       "type": "array",
       "items": { "$ref": "#/definitions/report" }
+    },
+    "errors": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/error" }
     }
   },
 
@@ -406,6 +410,13 @@
         "header": { "type": "boolean" },
         "mergeRows": { "type": "boolean" },
         "sortAsc": { "type": "boolean" }
+      }
+    },
+
+    "error": { "type": "object",
+      "properties": {
+        "type": { "type": "string" },
+        "error": { "type": "string" }
       }
     }
   }
