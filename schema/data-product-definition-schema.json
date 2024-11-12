@@ -22,10 +22,6 @@
       "type": "array",
       "items": { "$ref": "#/definitions/dashboard" }
     },
-    "metrics": {
-      "type": "array",
-      "items": { "$ref": "#/definitions/metric" }
-    },
     "policy": {
       "type": "array",
       "items": { "$ref": "#/definitions/policy" }
@@ -120,11 +116,12 @@
 
     "dashboard": {
       "type": "object",
-      "required": ["id", "name", "description", "metrics"],
+      "required": ["id", "name", "description", "dataset","metrics"],
       "properties": {
         "id":  { "type": "string" },
         "name":  { "type": "string" },
         "description":  { "type": "string" },
+        "dataset": { "type": "string" },
         "metrics": {
           "type": "array",
           "items": { "$ref": "#/definitions/dashboard-metric-definition" }
@@ -134,10 +131,17 @@
 
     "dashboard-metric-definition": {
       "type": "object",
-      "required": ["id"],
+      "required": ["id", "name", "display", "description", "charts"],
       "properties": {
-        "id":  { "type": "string" }
+        "id":  { "type": "string" },
+        "name": { "type": "string" },
+        "display": { "type": "string" },
+        "description": { "type": "string" },
+        "charts": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/dashboard-metric-chart" }
         }
+      }
       },
 
     "metric": {
@@ -169,6 +173,37 @@
           "type": "array",
           "items":  { "enum": ["doughnut","bar","line"] }
         }
+      }
+    },
+    "dashboard-metric-chart": {
+      "type": "object",
+      "required": ["type", "label", "unit", "columns"],
+      "properties": {
+        "type": { "enum": ["doughnut","bar","line"] },
+        "label": {
+          "type": "object",
+          "required": ["name", "display"],
+          "properties": {
+            "name": {"type": "string"},
+            "display": {"type": "string"}
+          }
+        },
+        "unit": {"type": "string"},
+        "columns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/metric-chart-column"
+          }
+        }
+      }
+    },
+
+    "metric-chart-column": {
+      "type": "object",
+      "required": ["name", "display"],
+      "properties": {
+        "name": {"type": "string"},
+        "display": {"type": "string"}
       }
     },
 
