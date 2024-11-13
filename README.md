@@ -138,7 +138,6 @@ As well as the standard ID, name, description, etc. each report contains:
     - **name**: A reference to a summary dataset field.
     - **header**: Whether this content should be displayed with header formatting (in bold). Useful for when the column data contains labels.
     - **mergeRows**: Whether vertically adjacent field values that are the same should be merged into a single cell.
-    - **sortAsc**: By default summaries are sorted in ascending order. If this is false, then this field will be sorted in descending order.
 
 ## dashboards
 
