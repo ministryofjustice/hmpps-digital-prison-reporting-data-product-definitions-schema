@@ -19,7 +19,11 @@ Each DPD contains at least one dataset, often several.
 A dataset consists of:
 - **datasource**: As above - the location of the data.
 - **query**: A SQL query to run to retrieve the data.
-- **schema/fields**: A list of columns to be returned by the query - their type and default names.
+- **schema/fields**: A list of columns to be returned by the query - their type and default names. Many of these properties can be overridden by report-specific values.
+  - **name**: The name of the field/column in the SQL query.
+  - **display**: The name of the field to display in the report and in the filters, if filtered (e.g. `First name`).
+  - **filter**: See "Filters" in the "Notable Features" section below.
+  - **type**: The data type of the field. Used for deciding cell alignment and default transforms (e.g. rendering dates).
 - **parameters**: A list of filters to be applied within the query - distinct from field filters in the report, as these are a legacy of reports migrated from Business Objects.  
 
 There are three types of dataset:
