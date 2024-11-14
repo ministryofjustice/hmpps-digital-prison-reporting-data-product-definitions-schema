@@ -93,7 +93,8 @@
         "sensitivity": { "$ref": "#/definitions/sensitivity" },
         "alias": { "$ref": "#/definitions/alias" },
         "tags": { "$ref": "#/definitions/tags" },
-        "type": { "enum": ["null", "boolean", "int", "long", "float", "double", "bytes", "string", "date", "time", "datetime", "timestamp"] }
+        "type": { "enum": ["null", "boolean", "int", "long", "float", "double", "bytes", "string", "date", "time", "datetime", "timestamp"] },
+        "filter": { "$ref": "#/definitions/filter" }
       },
       "additionalProperties": true
     },
@@ -218,7 +219,8 @@
         "staticoptions": { "$ref": "#/definitions/static-options" },
         "dynamicOptions": {"$ref": "#/definitions/dynamic-options" },
         "min": { "type": "string" },
-        "max": { "type": "string" }
+        "max": { "type": "string" },
+        "interactive": { "type": "boolean" }
       }
     },
 
