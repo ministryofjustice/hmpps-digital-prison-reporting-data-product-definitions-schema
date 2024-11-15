@@ -288,6 +288,17 @@ Here is a more detailed explanation of the Dynamic filter properties:
 - **name**: The dataset field that should be used for the filter options' back-end value.
 - **display**: The dataset field that should be used for the filter options' displayed value.
 
+### Interactive
+
+- **interactive**: Whether the filter should be shown on the list/dashboard itself, or on the Request screen:
+  - **true**: Used on the results page - applied to the _results_ of the requested report.
+  - **false**: Used on the Report Request page - limiting the _initial query_.
+
+For example, a "Visits by Person" report could have a mandatory non-interactive filter for "NOMS Number", and an optional interactive filter for "Establishment".
+- The NOMS Number would be displayed on the Report Request page. The user would enter the prisoner's number and then request the report.
+- The report would be run and cached for that particular prisoner. 
+- When the user views the report, they would have the option to further explore the visits by selecting which Establishment they were in (or All). 
+
 ### Other properties
 
 - **min/max**: Restrict the available values in the `date` and `daterange` date pickers.
