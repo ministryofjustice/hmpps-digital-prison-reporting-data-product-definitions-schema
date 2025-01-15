@@ -340,7 +340,8 @@
         "classification": { "type": "string" },
         "policy": { "type": "array", "items": { "$ref": "#/definitions/policy" } },
         "specification": { "$ref": "#/definitions/report-specification" },
-        "summary": { "type": "array", "items": { "$ref": "#/definitions/report-summary" } }
+        "summary": { "type": "array", "items": { "$ref": "#/definitions/report-summary" } },
+        "schedule": { "type": "string" }
       }
     },
 
