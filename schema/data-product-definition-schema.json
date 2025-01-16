@@ -213,7 +213,7 @@
       "type": "object",
       "required": ["type"],
       "properties": {
-        "type": { "enum": ["radio", "select", "daterange", "date", "autocomplete", "text"] },
+        "type": { "enum": ["radio", "select", "daterange", "date", "autocomplete", "text", "granulardaterange"] },
         "default": { "type": "string" },
         "pattern": { "type": "string" },
         "mandatory": { "type": "boolean" },
@@ -221,7 +221,33 @@
         "dynamicOptions": {"$ref": "#/definitions/dynamic-options" },
         "min": { "type": "string" },
         "max": { "type": "string" },
-        "interactive": { "type": "boolean" }
+        "interactive": { "type": "boolean" },
+        "defaultGranularity": {"enum": ["hourly", "daily", "weekly", "monthly", "quarterly", "annually"] },
+        "defaultQuickFilterValue": {
+          "enum": [
+            "today",
+            "yesterday",
+            "last-seven-days",
+            "last-thirty-days",
+            "last-month",
+            "last-full-month",
+            "last-ninety-days",
+            "last-three-months",
+            "last-full-three-months",
+            "last-year",
+            "last-full-year",
+            "tomorrow",
+            "next-seven-days",
+            "next-thirty-days",
+            "next-month",
+            "next-full-month",
+            "next-ninety-days",
+            "next-three-months",
+            "next-full-three-months",
+            "next-year",
+            "next-full-year"
+          ]
+        }
       }
     },
 

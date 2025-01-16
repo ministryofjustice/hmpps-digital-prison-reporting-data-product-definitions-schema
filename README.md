@@ -217,7 +217,8 @@ Filters can have the following types:
 - **date**: A single date picker.
 - **daterange**: Two date pickers (start and end), with the option to select a relative range (such as "Last month").
 - **text**: A standard text box that allows the user to type a value.
-- **autocomplete**: A text box which displays options for the user to pick from, as they type.
+- **autocomplete**: A text box which displays options for the user to pick from, as they type. 
+- **granulardaterange**: A date range input which will allow for granular date selection e.g. hourly, daily etc. 
 
 ### Validation
 
@@ -307,4 +308,6 @@ For example, a "Visits by Person" report could have a mandatory non-interactive 
   - `today()`: The current date.
   - `today(-7,DAYS)`: The date a week ago.
   - `today(2,YEARS)`: The date in 2 years time.
+- **defaultGranularity**: Sets the default granularity for the "granulardaterange" filter type. This can be hourly, daily, weekly, monthly, quarterly or annually.
+- **defaultQuickFilterValue**: Sets the default value for a quick filter. Values include today, yesterday, last-seven-days, next-year and more. The intention is either the "default" or "defaultQuickFilterValue" to be set. When this value is set, the "default" filter property must not be set. If both "defaultQuickFilterValue" and "default" are set "defaultQuickFilterValue" will take precedence.
 
