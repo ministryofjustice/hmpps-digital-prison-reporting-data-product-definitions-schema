@@ -61,6 +61,7 @@
         "id": { "type": "string" },
         "name": { "type": "string" },
         "description": { "type": "string" },
+        "schedule": { "type": "string" },
         "datasource": { "type": "string" },
         "parameters": {
           "type": "array",
@@ -340,8 +341,7 @@
         "classification": { "type": "string" },
         "policy": { "type": "array", "items": { "$ref": "#/definitions/policy" } },
         "specification": { "$ref": "#/definitions/report-specification" },
-        "summary": { "type": "array", "items": { "$ref": "#/definitions/report-summary" } },
-        "schedule": { "type": "string" }
+        "summary": { "type": "array", "items": { "$ref": "#/definitions/report-summary" } }
       }
     },
 
