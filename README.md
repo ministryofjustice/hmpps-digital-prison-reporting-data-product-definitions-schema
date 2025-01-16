@@ -308,5 +308,5 @@ For example, a "Visits by Person" report could have a mandatory non-interactive 
   - `today(-7,DAYS)`: The date a week ago.
   - `today(2,YEARS)`: The date in 2 years time.
 - **defaultGranularity**: Sets the default granularity for the "granulardaterange" filter type. This can be hourly, daily, weekly, monthly, quarterly or annually.
-- **defaultQuickFilterValue**: Sets the default value for a quick filter. Values include today, yesterday, last-seven-days, next-year and more. The intention is either the "default" or "defaultQuickFilterValue" to be set. When this value is set, the "default" filter property must not be set. If both "defaultQuickFilterValue" and "default" are set "default" will take precedence.
+- **defaultQuickFilterValue**: Sets the default value for a quick filter. Values include today, yesterday, last-seven-days, next-year and more. The intention is either the "default" or "defaultQuickFilterValue" to be set. When this value is set, the "default" filter property must not be set. If both "defaultQuickFilterValue" and "default" are set "defaultQuickFilterValue" will take precedence.
 
