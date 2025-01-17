@@ -61,6 +61,7 @@
         "id": { "type": "string" },
         "name": { "type": "string" },
         "description": { "type": "string" },
+        "schedule": { "type": "string" },
         "datasource": { "type": "string" },
         "parameters": {
           "type": "array",
@@ -356,6 +357,7 @@
         "id": { "type": "string" },
         "name": { "type": "string" },
         "description": { "type": "string" },
+        "schedule": { "type": "string" },
         "created": { "type": "string" },
         "modified": { "type": "string" },
         "withdrawn": { "type": "string" },

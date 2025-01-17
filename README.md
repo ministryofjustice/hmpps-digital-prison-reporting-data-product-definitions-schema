@@ -25,6 +25,7 @@ A dataset consists of:
   - **filter**: See "Filters" in the "Notable Features" section below.
   - **type**: The data type of the field. Used for deciding cell alignment and default transforms (e.g. rendering dates).
 - **parameters**: A list of filters to be applied within the query - distinct from field filters in the report, as these are a legacy of reports migrated from Business Objects.  
+- **schedule**: A CRON tab expression representing the regular schedule to generate the dataset.
 
 There are three types of dataset:
 - Standard dataset: Used for retrieving data to be displayed in a report.
@@ -142,6 +143,7 @@ As well as the standard ID, name, description, etc. each report contains:
     - **name**: A reference to a summary dataset field.
     - **header**: Whether this content should be displayed with header formatting (in bold). Useful for when the column data contains labels.
     - **mergeRows**: Whether vertically adjacent field values that are the same should be merged into a single cell.
+  - **schedule**: A CRON tab expression representing the regular schedule to generate the report.
 
 ## dashboards
 
