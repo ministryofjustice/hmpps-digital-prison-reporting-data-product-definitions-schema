@@ -485,15 +485,15 @@
         "entityId": { "type": "string" },
         "entityType": { "type": "string" }
       }
-    }
-  },
+    },
 
-  "report-child": {
-    "type": "object",
-    "required": ["reportId", "joinField"],
-    "properties": {
-      "reportId": { "type": "string" },
-      "joinField": { "type": "array", "items": { "type": "string" } }
+    "report-child": {
+      "type": "object",
+      "required": ["reportId", "joinField"],
+      "properties": {
+        "reportId": { "type": "string" },
+        "joinField": { "type": "array", "items": { "type": "string" } }
+      }
     }
   }
 }
