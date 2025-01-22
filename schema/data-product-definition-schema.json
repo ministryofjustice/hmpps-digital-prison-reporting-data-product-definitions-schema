@@ -364,11 +364,12 @@
         "version": { "type": "string" },
         "dataset": { "type": "string" },
         "filter": { "$ref": "#/definitions/report-filter" },
-        "render": { "type": "string" },
+        "render": { "enum": ["HTML", "HTML-child"] },
         "classification": { "type": "string" },
         "policy": { "type": "array", "items": { "$ref": "#/definitions/policy" } },
         "specification": { "$ref": "#/definitions/report-specification" },
-        "summary": { "type": "array", "items": { "$ref": "#/definitions/report-summary" } }
+        "summary": { "type": "array", "items": { "$ref": "#/definitions/report-summary" } },
+        "child": { "type": "array", "items": { "$ref": "#/definitions/report-child" } }
       }
     },
 
@@ -389,7 +390,7 @@
       "type": "object",
       "required": ["template", "field"],
       "properties": {
-        "template": { "enum": ["list", "list-section", "list-tab", "summary", "summary-section"] },
+        "template": { "enum": ["list", "list-section", "list-tab", "summary", "summary-section", "parent-child"] },
         "section": {
           "type": "array",
           "items": { "type": "string" }
@@ -484,6 +485,15 @@
         "entityId": { "type": "string" },
         "entityType": { "type": "string" }
       }
+    }
+  },
+
+  "report-child": {
+    "type": "object",
+    "required": ["reportId", "joinField"],
+    "properties": {
+      "reportId": { "type": "string" },
+      "joinField": { "type": "array", "items": { "type": "string" } }
     }
   }
 }
