@@ -317,4 +317,10 @@ For example, a "Visits by Person" report could have a mandatory non-interactive 
 
 ## Parent-Child Template
 
-[//]: # (TODO)
+In order to use the parent-child template, two things need to be in place:
+- The report's template should be set to `parent-child`.
+- The `child` property of the report should contain the IDs of other reports to render as children of the current report (and the relevant fields to join on).
+
+Optionally, the child report's `render` property can be set to `HTML-child` to prevent it from showing in the UI's report list.
+
+Once the above are in place, the relevant information will be sent to the UI for it to render the report.
