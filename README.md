@@ -324,3 +324,9 @@ In order to use the parent-child template, two things need to be in place:
 Optionally, the child report's `render` property can be set to `HTML-child` to prevent it from showing in the UI's report list.
 
 Once the above are in place, the relevant information will be sent to the UI for it to render the report.
+
+## Scheduling
+
+Scheduling consists of 2 main parts.
+- a top level `scheduled` attribute set to true or false. This should be set to true if there are any `schedule` elements throughout the definition.
+- A dataset or report can then have a `schedule` defined with an appropriate cron expression.
