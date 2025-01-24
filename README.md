@@ -99,7 +99,9 @@ As well as the standard ID, name, description, etc. each report contains:
         "query": "prefilter_ AS (SELECT * FROM dataset_ WHERE direction = 'In')"
       },
     ```
-- **render**: The method used to render the report - currently only `HTML` is supported. 
+- **render**: The method used to render the report:
+  - **HTML**: A standard report viewed on the maiun UI.
+  - **HTML-child**: A report that shuold only be rendered within a `parent-child` report template.
 - **classification**: The classification of the report - in the current classification system only `OFFICIAL` is supported. 
 - **policy**: _Unused_
 - **specification**: Contains details of how the report should be displayed:
@@ -109,6 +111,7 @@ As well as the standard ID, name, description, etc. each report contains:
     - **list-tab**: _Unused_ - to be a collation of reports on different tabs.
     - **summary**: A template where the data is not shown - only the page header and footer summaries.
     - **summary-section**: A template where the data is not shown - only the summaries (page/section header/footer), split by section.
+    - **parent-child**: Similar to the sectioned list, but each section has a row from a "parent" dataset, and contains zero or more tables from "child" datasets. See "Parent-Child Template" below.
   - **section**: A list of names of fields in the below `fields` property whose values should be used to split a sectioned template.
     - For example, if the `ESTABLISHMENT_DESCRIPTION` field was listed here, then the list would be split into sections on establishment name.
   - **field**: A list of supplementary display information for dataset fields. Not required for `summary` templates, but should include sectioning fields:
@@ -312,3 +315,12 @@ For example, a "Visits by Person" report could have a mandatory non-interactive 
 - **defaultGranularity**: Sets the default granularity for the "granulardaterange" filter type. This can be hourly, daily, weekly, monthly, quarterly or annually.
 - **defaultQuickFilterValue**: Sets the default value for a quick filter. Values include today, yesterday, last-seven-days, next-year and more. The intention is either the "default" or "defaultQuickFilterValue" to be set. When this value is set, the "default" filter property must not be set. If both "defaultQuickFilterValue" and "default" are set "defaultQuickFilterValue" will take precedence.
 
+## Parent-Child Template
+
+In order to use the parent-child template, two things need to be in place:
+- The report's template should be set to `parent-child`.
+- The `child` property of the report should contain the IDs of other reports to render as children of the current report (and the relevant fields to join on).
+
+Optionally, the child report's `render` property can be set to `HTML-child` to prevent it from showing in the UI's report list.
+
+Once the above are in place, the relevant information will be sent to the UI for it to render the report.
