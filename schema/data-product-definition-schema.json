@@ -9,6 +9,7 @@
     "id": { "type": "string" },
     "name": { "type": "string" },
     "description": { "type": "string" },
+    "scheduled": { "type": "string" },
     "metadata": { "$ref": "#/definitions/metadata" },
     "datasource": {
       "type": "array",
