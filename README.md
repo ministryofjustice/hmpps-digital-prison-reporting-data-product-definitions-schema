@@ -85,6 +85,26 @@ Example of granting access by caseload:
   ],
 ```
 
+Example of granting access any caseload a user has:
+```json
+"policy": [
+    {
+      "id": "caseloads",
+      "type": "row-level",
+      "action": ["establishment_code in (${caseloads})"],
+      "rule": [
+        {
+          "effect": "permit",
+          "condition": [
+            {
+              "exists": ["${caseloads}"]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+```
 ## report
 
 Each DPD contains zero or more reports (called a Variant in the UI). These are different ways to display the data from a dataset in list (or list-like) form.
