@@ -119,33 +119,33 @@
 
     "dashboard": {
       "type": "object",
-      "required": ["id", "name", "description", "dataset","metrics"],
+      "required": ["id", "name", "description", "dataset","sections"],
       "properties": {
         "id":  { "type": "string" },
         "name":  { "type": "string" },
         "description":  { "type": "string" },
         "dataset": { "type": "string" },
-        "metrics": {
+        "sections": {
           "type": "array",
-          "items": { "$ref": "#/definitions/dashboard-metric-definition" }
-        }
+          "items": { "$ref": "#/definitions/dashboard-section-definition" }
+        },
+        "filter": { "$ref": "#/definitions/report-filter" }
       }
     },
 
-    "dashboard-metric-definition": {
+    "dashboard-section-definition": {
       "type": "object",
-      "required": ["id", "name", "display", "description", "charts"],
+      "required": ["id", "visualisations"],
       "properties": {
         "id":  { "type": "string" },
-        "name": { "type": "string" },
         "display": { "type": "string" },
         "description": { "type": "string" },
-        "charts": {
+        "visualisations": {
           "type": "array",
-          "items": { "$ref": "#/definitions/dashboard-metric-chart" }
+          "items": { "$ref": "#/definitions/dashboard-visualisation" }
         }
       }
-      },
+    },
 
     "metric": {
       "type": "object",
@@ -178,35 +178,55 @@
         }
       }
     },
-    "dashboard-metric-chart": {
+    "dashboard-visualisation": {
       "type": "object",
-      "required": ["type", "label", "unit", "columns"],
+      "required": ["id","type", "columns"],
       "properties": {
-        "type": { "enum": ["doughnut","bar","line"] },
-        "label": {
-          "type": "object",
-          "required": ["name", "display"],
-          "properties": {
-            "name": {"type": "string"},
-            "display": {"type": "string"}
-          }
-        },
-        "unit": {"type": "string"},
+        "id": {"type": "string"},
+        "type": { "enum": ["scorecard-group","scorecard","line","bar-timeseries","bar","doughnut", "list"] },
+        "display": {"type": "string"},
+        "description": {"type": "string"},
         "columns": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/metric-chart-column"
+          "type": "object",
+          "required": ["measures", "expectNulls"],
+          "properties": {
+            "keys": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/dashboard-visualisation-column" }
+            },
+            "measures": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/dashboard-visualisation-column" }
+            },
+            "filters": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/value-visualisation-column" }
+            },
+            "expectNulls": {"type": "boolean"}
           }
         }
       }
     },
 
-    "metric-chart-column": {
+    "dashboard-visualisation-column": {
       "type": "object",
-      "required": ["name", "display"],
+      "required": ["id", "display"],
       "properties": {
-        "name": {"type": "string"},
-        "display": {"type": "string"}
+        "id": {"type": "string"},
+        "display": {"type": "string"},
+        "aggregate": {"enum": ["sum", "average"] },
+        "unit": {"enum": ["number", "percentage"] },
+        "displayValue": {"type": "boolean"},
+        "axis": {"type": "string"}
+      }
+    },
+
+    "value-visualisation-column": {
+      "type": "object",
+      "required": ["id", "equals"],
+      "properties": {
+        "id": {"type": "string"},
+        "equals": {"type": "string"}
       }
     },
 
