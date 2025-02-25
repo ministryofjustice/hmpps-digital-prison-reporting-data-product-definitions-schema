@@ -202,7 +202,9 @@
               "type": "array",
               "items": { "$ref": "#/definitions/value-visualisation-column" }
             },
-            "expectNulls": {"type": "boolean"}
+            "expectNulls": {"type": "boolean"},
+            "showLatest": {"type": "boolean"},
+            "columnsAsList": {"type": "boolean"}
           }
         }
       }
@@ -217,7 +219,8 @@
         "aggregate": {"enum": ["sum", "average"] },
         "unit": {"enum": ["number", "percentage"] },
         "displayValue": {"type": "boolean"},
-        "axis": {"type": "string"}
+        "axis": {"type": "string"},
+        "optional": {"type": "boolean"}
       }
     },
 
