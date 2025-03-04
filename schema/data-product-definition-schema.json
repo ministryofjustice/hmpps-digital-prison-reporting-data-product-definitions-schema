@@ -237,7 +237,7 @@
       "type": "object",
       "required": ["type"],
       "properties": {
-        "type": { "enum": ["radio", "select", "daterange", "date", "autocomplete", "text", "granulardaterange"] },
+        "type": { "enum": ["radio", "select", "daterange", "date", "autocomplete", "text", "granulardaterange", "caseloads", "multiselect"] },
         "default": { "type": "string" },
         "pattern": { "type": "string" },
         "mandatory": { "type": "boolean" },
