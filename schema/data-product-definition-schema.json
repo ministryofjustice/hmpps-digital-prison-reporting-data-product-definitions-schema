@@ -119,13 +119,13 @@
 
     "dashboard": {
       "type": "object",
-      "required": ["id", "name", "dataset", "sections"],
+      "required": ["id", "name", "dataset", "section"],
       "properties": {
         "id":  { "type": "string" },
         "name":  { "type": "string" },
         "description":  { "type": "string" },
         "dataset": { "type": "string" },
-        "sections": {
+        "section": {
           "type": "array",
           "items": { "$ref": "#/definitions/dashboard-section-definition" }
         },
