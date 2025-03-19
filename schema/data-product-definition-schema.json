@@ -19,7 +19,7 @@
       "type": "array",
       "items": { "$ref": "#/definitions/dataset" }
     },
-    "dashboards": {
+    "dashboard": {
       "type": "array",
       "items": { "$ref": "#/definitions/dashboard" }
     },
@@ -119,13 +119,13 @@
 
     "dashboard": {
       "type": "object",
-      "required": ["id", "name", "description", "dataset","sections"],
+      "required": ["id", "name", "dataset", "section"],
       "properties": {
         "id":  { "type": "string" },
         "name":  { "type": "string" },
         "description":  { "type": "string" },
         "dataset": { "type": "string" },
-        "sections": {
+        "section": {
           "type": "array",
           "items": { "$ref": "#/definitions/dashboard-section-definition" }
         },
@@ -135,12 +135,12 @@
 
     "dashboard-section-definition": {
       "type": "object",
-      "required": ["id", "visualisations"],
+      "required": ["id", "visualisation"],
       "properties": {
         "id":  { "type": "string" },
         "display": { "type": "string" },
         "description": { "type": "string" },
-        "visualisations": {
+        "visualisation": {
           "type": "array",
           "items": { "$ref": "#/definitions/dashboard-visualisation" }
         }
@@ -180,21 +180,21 @@
     },
     "dashboard-visualisation": {
       "type": "object",
-      "required": ["id","type", "columns"],
+      "required": ["id","type", "column"],
       "properties": {
         "id": {"type": "string"},
         "type": { "enum": ["scorecard-group","scorecard","line","bar-timeseries","bar","doughnut", "list"] },
         "display": {"type": "string"},
         "description": {"type": "string"},
-        "columns": {
+        "column": {
           "type": "object",
-          "required": ["measures", "expectNulls"],
+          "required": ["measure", "expectNull"],
           "properties": {
-            "keys": {
+            "key": {
               "type": "array",
               "items": { "$ref": "#/definitions/dashboard-visualisation-column" }
             },
-            "measures": {
+            "measure": {
               "type": "array",
               "items": { "$ref": "#/definitions/dashboard-visualisation-column" }
             },
@@ -202,7 +202,7 @@
               "type": "array",
               "items": { "$ref": "#/definitions/value-visualisation-column" }
             },
-            "expectNulls": {"type": "boolean"},
+            "expectNull": {"type": "boolean"},
             "showLatest": {"type": "boolean"},
             "columnsAsList": {"type": "boolean"}
           }
