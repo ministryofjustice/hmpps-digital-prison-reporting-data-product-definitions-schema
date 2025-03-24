@@ -243,6 +243,17 @@ Filters can have the following types:
 - **text**: A standard text box that allows the user to type a value.
 - **autocomplete**: A text box which displays options for the user to pick from, as they type. 
 - **granulardaterange**: A date range input which will allow for granular date selection e.g. hourly, daily etc. 
+- **multiselect**: A list of checkboxes multiple of which can be selected.
+- **caseloads**: This type gets translated from the [BackEnd API library](https://github.com/ministryofjustice/hmpps-digital-prison-reporting-lib) to a multiselect type with a list of static filter options containing the user caseloads. For example:
+  ```json{
+  "filter" : {
+    "type" : "caseloads",
+    "mandatory": "false"
+  }
+  }
+  ```
+  As part of the `/definitions` endpoints responses, the above filter in the report field of the Data Product Definition will be mapped by the BE library to a `multiselect` report filter which will contain the list of user caseloads as static options.
+  And the filter default value will be populated as a comma separated string of the caseloads.
 
 ### Validation
 
