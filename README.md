@@ -131,7 +131,8 @@ As well as the standard ID, name, description, etc. each report contains:
     - **list-tab**: _Unused_ - to be a collation of reports on different tabs.
     - **summary**: A template where the data is not shown - only the page header and footer summaries.
     - **summary-section**: A template where the data is not shown - only the summaries (page/section header/footer), split by section.
-    - **parent-child**: Similar to the sectioned list, but each section has a row from a "parent" dataset, and contains zero or more tables from "child" datasets. See "Parent-Child Template" below.
+    - **parent-child**: Similar to the sectioned list, but each section has a row from a "parent" dataset, and contains zero or more tables from "child" datasets. See [Parent-Child Template](#Parent-Child-Template).
+    - **parent-child-section**: A combination of both `parent-child` and `list-section` templates. For more information refer to [parent-child-section Template](#parent-child-section-Template).   
   - **section**: A list of names of fields in the below `fields` property whose values should be used to split a sectioned template.
     - For example, if the `ESTABLISHMENT_DESCRIPTION` field was listed here, then the list would be split into sections on establishment name.
   - **field**: A list of supplementary display information for dataset fields. Not required for `summary` templates, but should include sectioning fields:
