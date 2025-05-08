@@ -356,6 +356,17 @@ Optionally, the child report's `render` property can be set to `HTML-child` to p
 
 Once the above are in place, the relevant information will be sent to the UI for it to render the report.
 
+## parent-child-section Template
+
+This is a combination of a sectioned [report](#report) and a [parent-child](#Parent-Child-Template).
+In order to use this template: 
+- The report's template should be set to `parent-child-section`.
+- The child property of the report should contain the IDs of other reports to render as children of the current report (and the relevant fields to join on).
+- There should be a section list which contains a list of fields to section on (e.g. direction, establishment). You can refer to the `section` part of the [report](#report) for more details.
+
+Optionally, the child report's `render` property can be set to `HTML-child` to prevent it from showing in the UI's report list.
+
+
 ## Scheduling
 
 Scheduling consists of 2 main parts.
