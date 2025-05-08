@@ -414,7 +414,7 @@
       "type": "object",
       "required": ["template", "field"],
       "properties": {
-        "template": { "enum": ["list", "list-section", "list-tab", "summary", "summary-section", "parent-child"] },
+        "template": { "enum": ["list", "list-section", "list-tab", "summary", "summary-section", "parent-child", "parent-child-section"] },
         "section": {
           "type": "array",
           "items": { "type": "string" }
