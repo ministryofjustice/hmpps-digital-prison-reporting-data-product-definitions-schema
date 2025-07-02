@@ -9,8 +9,37 @@ A Data Production Definition (DPD) describes where to find and how to display da
 ## datasource
 
 The datasource section shows where a dataset should source its data from. This could be the DPR RedShift (AKA `datamart`), NOMIS, or other data source.
+#### For multiphase queries the datasource is defined at each query level and it has the following required fields:
+```
+  id: String,
+  name: String,
+  database: String,
+  catalog: String,
+  connection: DatasourceConnection,
+  dialect: SqlDialect
+```
+Multiphase queries are executed asynchronously using Athena and depending on the connection, they can either be federated queries against the defined catalog or
+simple queries against the Aws Glue Data Catalog.
+- `id` - User defined unique id of the datasource.
+- `name` - User defined name of the datasource.
+- `database` - For federated queries this corresponds to the target database user/schema against which the query will run.
+For non federated Glue queries this is the name of the Glue database.
+- `catalog` - For federated queries, this is the name of the Athena data source connector which was configured to run federated queries against a given database.
+For non federated Glue queries, this is `AwsDataCatalog` which maps to the AWS Glue Data Catalog.
+- `connection` - Allowed values: 
+  - `federated` - For running federated passthrough queries. 
+  - `awsdatacatalog` For running standard Athena queries against the AWS Glue Data Catalog.
+  - `datawarehouse` This is Redshift where the async query results are retrieved from by default. 
+For the `awsdatacatalog` queries the `dialect` has to be set to `athena/3`. 
+- `dialect` - Please refer to the [schema definition json file](https://github.com/ministryofjustice/hmpps-digital-prison-reporting-data-product-definitions-schema/blob/main/schema/data-product-definition-schema.json)
+  for the allowed values.
 
-The datasource also contains the database to connect to.
+#### For embedded reports which use the synchronous journey:
+- If there is only one Spring datasource configured then the only required field is the id.
+- If there are multiple custom data sources configured then both `id` and `name` are required with the name having to match your corresponding custom Datasource Bean name. 
+For more details refer to [this document](https://github.com/ministryofjustice/hmpps-digital-prison-reporting-lib/blob/main/integrating-with-library.md) 
+and search for `Spring DataSource configuration`.
+
 
 ## dataset
 
@@ -29,7 +58,7 @@ A dataset consists of:
 
 There are three types of dataset:
 - Standard dataset: Used for retrieving data to be displayed in a report.
-  - Can be Oracle SQL if  NOMIS datasource is used, otherwise RedShift Postgres-like SQL.
+  - Can be Oracle SQL for Oracle federated passthrough queries, if NOMIS datasource is used for example, or PostgreSQL, or Athena and RedShift Postgres-like SQL.
 - Summary dataset: Used for retrieving data to be displayed in a single summary section of a report.
   - Always RedShift SQL.
   - Contains a ${tableId} token denoting the name of the table containing the results of the Standard DataSet.

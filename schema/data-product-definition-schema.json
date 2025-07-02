@@ -48,7 +48,8 @@
       "properties": {
         "id": { "type": "string" },
         "name": { "type": "string" },
-        "connection": { "type": "string" },
+        "connection": { "enum": ["federated", "awsdatacatalog", "datawarehouse"] },
+        "dialect": { "enum": ["oracle/11g", "postgres/19", "redshift/4", "athena/3"]},
         "database": { "type": "string" },
         "catalog": { "type": "string" }
       },
