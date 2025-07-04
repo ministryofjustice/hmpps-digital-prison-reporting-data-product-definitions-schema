@@ -174,6 +174,9 @@ As well as the standard ID, name, description, etc. each report contains:
       - **mandatory**: Visible (cannot be removed).
     - **sortable**: Whether the report list can be sorted on this field.
     - **defaultsort**: Whether this field is the report's default sort option. If more than one field is selected, the first is used.
+    - **sortdirection**: The default sort direction based on this field when it is used for sorting the report. Allowed values:
+      - **`asc`**
+      - **`desc`**
     - **wordwrap**: How the contents of the field values will be wrapped if it is larger than the cell:
       - **none**: Avoid wrapping where possible - useful for things like name.
       - **normal**: Default behaviour - wrap when necessary.
