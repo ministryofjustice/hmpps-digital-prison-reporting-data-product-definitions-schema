@@ -438,6 +438,7 @@
         "visible": { "enum": ["true", "false", "mandatory"] },
         "sortable": { "type": "boolean" },
         "defaultsort": { "type": "boolean" },
+        "sortdirection": { "enum": ["asc", "desc"] },
         "wordwrap": { "enum": ["none", "normal", "break-words"] },
         "alias": { "$ref": "#/definitions/alias" },
         "filter": { "$ref": "#/definitions/filter" },
