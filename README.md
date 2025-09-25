@@ -258,7 +258,7 @@ Summaries are defined in two parts:
       }
     }
     ```
-    - Section level summaries 'section-header' and 'section-footer', create a section summary within each section. For example
+    - Section level summaries 'section-header' and 'section-footer', create a section summary for each section. For example
     ```json
       {
       "summary": [
@@ -278,7 +278,7 @@ Summaries are defined in two parts:
     ...
   ```
   
-    - Table level summaries 'table-header' and 'table-footer' template types, these add extra rows to the main table header and footer. The cell names must match between the main data table and the summary dataset. For example
+    - Table level summaries 'table-header' and 'table-footer' add extra rows to the main data table header and footer. The cell names must match between the main data table and the summary dataset. For example
      ```json
       {
         "summary": [
