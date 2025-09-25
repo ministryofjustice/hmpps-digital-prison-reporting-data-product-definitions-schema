@@ -242,6 +242,52 @@ The formula field also supports functions:
 Summaries are defined in two parts:
 - The Summary Dataset, which defines how the source data (from the list's Standard dataset) is to be queried into summary data.
 - The Summary report property, which defines how the summary should be displayed on the page (position, header fields, etc.).
+  - Summaries break down into 3 main template types, 
+    - Page level summaries 'page-header' and 'page-footer' create a summary table at the top and bottom of the data table. For example
+    ```json
+      {
+        "summary": [
+        {
+          "id": "page-summary",
+          "template": "page-header",
+          "dataset": "$ref:total-summary"
+        }
+      ],
+      }
+    }
+    ```
+    - Section level summaries 'section-header' and 'section-footer', create a section summary within each section. For example
+    ```json
+      {
+      "summary": [
+         {
+          "id": "prisoner-distinct-count-by-iep-level",
+          "template": "section-header",
+          "dataset": "$ref:prisoner-distinct-count-by-iep-level"
+        },
+      ]
+    }
+    ```
+      where the specification of the report would be defined like this:
+  ```json
+    "specification": {
+    "template": "list-section",
+    "section": ["IEP_LEVEL"],
+    ...
+  ```
+  
+    - Table level summaries 'table-header' and 'table-footer' template types, these add extra rows to the main table header and footer. The cell names must match between the main data table and the summary dataset. For example
+     ```json
+      {
+        "summary": [
+        {
+          "id": "total-transactions",
+          "template": "table-header",
+          "dataset": "$ref:total-transactions"
+          }
+        ],
+      }
+    ```
 
 ### Data Workflow
 
