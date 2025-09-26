@@ -162,6 +162,8 @@ As well as the standard ID, name, description, etc. each report contains:
     - **summary-section**: A template where the data is not shown - only the summaries (page/section header/footer), split by section.
     - **parent-child**: Similar to the sectioned list, but each section has a row from a "parent" dataset, and contains zero or more tables from "child" datasets. See [Parent-Child Template](#Parent-Child-Template).
     - **parent-child-section**: A combination of both `parent-child` and `list-section` templates. For more information refer to [parent-child-section Template](#parent-child-section-Template).   
+    - **row-section**: Splits each row into a section, effectively display a column as a row
+    - **row-section-child**: Similar to the row-section template, but also contains data from 0 or more child datasets.
   - **section**: A list of names of fields in the below `fields` property whose values should be used to split a sectioned template.
     - For example, if the `ESTABLISHMENT_DESCRIPTION` field was listed here, then the list would be split into sections on establishment name.
   - **field**: A list of supplementary display information for dataset fields. Not required for `summary` templates, but should include sectioning fields:
@@ -242,6 +244,52 @@ The formula field also supports functions:
 Summaries are defined in two parts:
 - The Summary Dataset, which defines how the source data (from the list's Standard dataset) is to be queried into summary data.
 - The Summary report property, which defines how the summary should be displayed on the page (position, header fields, etc.).
+  - Summaries break down into 3 main template types, 
+    - Page level summaries 'page-header' and 'page-footer' create a summary table at the top and bottom of the data table. For example
+    ```json
+      {
+        "summary": [
+        {
+          "id": "page-summary",
+          "template": "page-header",
+          "dataset": "$ref:total-summary"
+        }
+      ],
+      }
+    }
+    ```
+    - Section level summaries 'section-header' and 'section-footer', create a section summary for each section. For example
+    ```json
+      {
+      "summary": [
+         {
+          "id": "prisoner-distinct-count-by-iep-level",
+          "template": "section-header",
+          "dataset": "$ref:prisoner-distinct-count-by-iep-level"
+        },
+      ]
+    }
+    ```
+      where the specification of the report would be defined like this:
+  ```json
+    "specification": {
+    "template": "list-section",
+    "section": ["IEP_LEVEL"],
+    ...
+  ```
+  
+    - Table level summaries 'table-header' and 'table-footer' add extra rows to the main data table header and footer. The cell names must match between the main data table and the summary dataset. For example
+     ```json
+      {
+        "summary": [
+        {
+          "id": "total-transactions",
+          "template": "table-header",
+          "dataset": "$ref:total-transactions"
+          }
+        ],
+      }
+    ```
 
 ### Data Workflow
 
