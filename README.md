@@ -34,6 +34,14 @@ For the `awsdatacatalog` queries the `dialect` has to be set to `athena/3`.
 - `dialect` - Please refer to the [schema definition json file](https://github.com/ministryofjustice/hmpps-digital-prison-reporting-data-product-definitions-schema/blob/main/schema/data-product-definition-schema.json)
   for the allowed values.
 
+#### Cross joins
+- Multiphase queries support combining results from different data sources to produce the final result.
+- This can be achieved by defining table placeholders in your queries like so: `${table[n]}`.
+- Each MultiphaseQuery must have an index defined.  
+- `n` in the table placeholder must be the index of the query whose resulting table will be used.
+- An example of a DPD with a multiphase query using cross joins can be found [here](https://github.com/ministryofjustice/hmpps-dpr-data-product-definitions/blob/main/dpd/dev/definitions/prisons/orphanage/mis-daru-incident-tracker.json). 
+
+
 #### For embedded reports which use the synchronous journey:
 - If there is only one Spring datasource configured then the only required field is the id.
 - If there are multiple custom data sources configured then both `id` and `name` are required with the name having to match your corresponding custom Datasource Bean name. 
@@ -203,9 +211,11 @@ As well as the standard ID, name, description, etc. each report contains:
     - **mergeRows**: Whether vertically adjacent field values that are the same should be merged into a single cell.
   - **schedule**: A CRON tab expression representing the regular schedule to generate the report.
 
-## dashboards
+## Dashboards
 
-TBD
+An example of a DPD with a dashboard can be found [here](https://github.com/ministryofjustice/hmpps-dpr-data-product-definitions/blob/main/dpd/dev/definitions/prisons/orphanage/mis-daru-incident-tracker.json#L183).
+<br>For further information regarding dashboard usage you can refer to [these docs](https://ministryofjustice.github.io/hmpps-digital-prison-reporting-frontend/dashboards/definitions/dashboard-definition/).
+<br>Note that [these docs](https://ministryofjustice.github.io/hmpps-digital-prison-reporting-frontend/dashboards/definitions/dashboard-definition/) are referring to the dashboard definition response returned from the API and not the the actual DPD so there are some naming differences like for example plural being used instead of singular. For example, `sections` vs `section` which is in the DPD.
 
 ## metrics
 
