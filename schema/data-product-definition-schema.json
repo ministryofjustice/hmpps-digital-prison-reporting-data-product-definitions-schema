@@ -248,6 +248,7 @@
         "min": { "type": "string" },
         "max": { "type": "string" },
         "interactive": { "type": "boolean" },
+        "index": {"type":  "integer"},
         "defaultGranularity": {"enum": ["hourly", "daily", "weekly", "monthly", "quarterly", "annually"] },
         "defaultQuickFilterValue": {
           "enum": [
