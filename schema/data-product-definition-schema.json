@@ -185,7 +185,7 @@
       "required": ["id","type", "column"],
       "properties": {
         "id": {"type": "string"},
-        "type": { "enum": ["scorecard-group","scorecard","line","bar-timeseries","bar","doughnut", "list"] },
+        "type": { "enum": ["scorecard-group","scorecard","line","bar-timeseries","bar","doughnut", "list", "matrix-timeseries", "line-timeseries"] },
         "display": {"type": "string"},
         "description": {"type": "string"},
         "column": {
@@ -200,21 +200,20 @@
               "type": "array",
               "items": { "$ref": "#/definitions/dashboard-visualisation-column" }
             },
-            "filters": {
+            "filter": {
               "type": "array",
               "items": { "$ref": "#/definitions/value-visualisation-column" }
             },
-            "expectNull": {"type": "boolean"},
-            "showLatest": {"type": "boolean"},
-            "columnsAsList": {"type": "boolean"}
+            "expectNull": {"type": "boolean"}
           }
-        }
+        },
+        "option": { "$ref": "#/definitions/dashboard-visualisation-option" }
       }
     },
 
     "dashboard-visualisation-column": {
       "type": "object",
-      "required": ["id", "display"],
+      "required": ["id"],
       "properties": {
         "id": {"type": "string"},
         "display": {"type": "string"},
@@ -232,6 +231,29 @@
       "properties": {
         "id": {"type": "string"},
         "equals": {"type": "string"}
+      }
+    },
+
+    "dashboard-visualisation-option": {
+      "type": "object",
+      "properties": {
+        "useRagColour": {"type": "boolean", "default": false },
+        "baseColour": {"type": "string"},
+        "buckets": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/dashboard-visualisation-option-bucket" }
+        },
+        "showLatest": {"type": "boolean", "default": true },
+        "columnsAsList": {"type": "boolean", "default": false }
+      }
+    },
+
+    "dashboard-visualisation-option-bucket": {
+      "type": "object",
+      "properties": {
+        "min": {"type": "number"},
+        "max": {"type": "number"},
+        "hexColour": {"type": "boolean"}
       }
     },
 
