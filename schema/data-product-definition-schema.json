@@ -416,7 +416,6 @@
         "filter": { "$ref": "#/definitions/report-filter" },
         "render": { "enum": ["HTML", "HTML-child"] },
         "classification": { "type": "string" },
-        "policy": { "type": "array", "items": { "$ref": "#/definitions/policy" } },
         "specification": { "$ref": "#/definitions/report-specification" },
         "summary": { "type": "array", "items": { "$ref": "#/definitions/report-summary" } },
         "child": { "type": "array", "items": { "$ref": "#/definitions/report-child" } }
