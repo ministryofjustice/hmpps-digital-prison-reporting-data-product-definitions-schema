@@ -160,7 +160,6 @@ As well as the standard ID, name, description, etc. each report contains:
   - **HTML**: A standard report viewed on the maiun UI.
   - **HTML-child**: A report that shuold only be rendered within a `parent-child` report template.
 - **classification**: The classification of the report - in the current classification system only `OFFICIAL` is supported. 
-- **policy**: _Unused_
 - **specification**: Contains details of how the report should be displayed:
   - **template**: The type of display template to be used:
     - **list**: A standard paged list.
