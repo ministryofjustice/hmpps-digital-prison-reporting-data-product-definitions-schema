@@ -137,7 +137,7 @@
 
     "dashboard-section-definition": {
       "type": "object",
-      "required": ["id", "visualisation"],
+      "required": ["id", "display", "visualisation"],
       "properties": {
         "id":  { "type": "string" },
         "display": { "type": "string" },
@@ -182,7 +182,7 @@
     },
     "dashboard-visualisation": {
       "type": "object",
-      "required": ["id","type", "column"],
+      "required": ["id","type", "display","column"],
       "properties": {
         "id": {"type": "string"},
         "type": { "enum": ["scorecard-group","scorecard","line","bar-timeseries","bar","doughnut", "list", "matrix-timeseries", "line-timeseries"] },
