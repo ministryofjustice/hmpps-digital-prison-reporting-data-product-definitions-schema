@@ -9,7 +9,7 @@ A Data Production Definition (DPD) describes where to find and how to display da
 ## datasource
 
 The datasource section shows where a dataset should source its data from. This could be the DPR RedShift (AKA `datamart`), NOMIS, or other data source.
-#### For multiphase queries the datasource of each query is referencing the datasource object defined at the dataset level which has the following required fields:
+#### For multiphase queries the datasource of each query is referencing the datasource object defined at the top DPD level which has the following required fields:
 ```
   id: String,
   name: String,
