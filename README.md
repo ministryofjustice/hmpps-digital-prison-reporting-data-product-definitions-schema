@@ -9,7 +9,7 @@ A Data Production Definition (DPD) describes where to find and how to display da
 ## datasource
 
 The datasource section shows where a dataset should source its data from. This could be the DPR RedShift (AKA `datamart`), NOMIS, or other data source.
-#### For multiphase queries the datasource is defined at each query level and it has the following required fields:
+#### For multiphase queries the datasource of each query is referencing the datasource object defined at the top DPD level which has the following required fields:
 ```
   id: String,
   name: String,
@@ -39,7 +39,7 @@ For the `awsdatacatalog` queries the `dialect` has to be set to `athena/3`.
 - This can be achieved by defining table placeholders in your queries like so: `${table[n]}`.
 - Each MultiphaseQuery must have an index defined.  
 - `n` in the table placeholder must be the index of the query whose resulting table will be used.
-- An example of a DPD with a multiphase query using cross joins can be found [here](https://github.com/ministryofjustice/hmpps-dpr-data-product-definitions/blob/main/dpd/dev/definitions/prisons/orphanage/mis-daru-incident-tracker.json). 
+- An example of a DPD with a multiphase query using cross joins can be found [here](https://github.com/ministryofjustice/hmpps-dpr-data-product-definitions/blob/main/dpd/test/definitions/prisons/orphanage/mis-daru-incident-tracker.json). 
 
 
 #### For embedded reports which use the synchronous journey:
