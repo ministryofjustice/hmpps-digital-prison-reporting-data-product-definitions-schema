@@ -75,7 +75,10 @@
               "type": "string"
             },
             {
-              "$ref": "#/definitions/multiphaseQuery"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/multiphaseQuery"
+              }
             }
           ]
         },
