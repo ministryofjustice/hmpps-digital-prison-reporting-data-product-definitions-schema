@@ -69,7 +69,19 @@
           "type": "array",
           "items": { "$ref": "#/definitions/dataset-parameter" }
         },
-        "query": { "type": "string" },
+        "query": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/multiphaseQuery"
+              }
+            }
+          ]
+        },
         "schema": {
           "type": "object",
           "required": ["field"],
@@ -543,6 +555,19 @@
       "properties": {
         "reportId": { "type": "string" },
         "joinField": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "multiphaseQuery": {
+      "type": "object",
+      "required": ["index", "datasource", "query"],
+      "properties": {
+        "index": { "type": "integer" },
+        "datasource": { "type": "string" },
+        "query": { "type": "string" },
+        "parameters": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/dataset-parameter" }
+        }
       }
     }
   }
