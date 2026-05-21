@@ -429,6 +429,7 @@ For example, a "Visits by Person" report could have a mandatory non-interactive 
 ### Other properties
 
 - **min/max**: Restrict the available values in the `date` and `daterange` date pickers.
+- **minSelected/maxSelected**: Restrict the maximum or minimum number of options that can be selected for a multi select or autocompletemulti filter type.
 - **default**: The default value for a filter. For `date` and `daterange` filters this can include values relative to today (in ISO format) using a formula:
   - `today()`: The current date.
   - `today(-7,DAYS)`: The date a week ago.
