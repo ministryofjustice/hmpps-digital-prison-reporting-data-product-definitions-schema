@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://raw.githubusercontent.com/ministryofjustice/hmpps-digital-prison-reporting-data-product-definitions-schema/6f83dd4d8bb93998492372473edc4b2fc5f13d73/schema/inputPorts.json",
+  "$id": "https://raw.githubusercontent.com/ministryofjustice/hmpps-digital-prison-reporting-data-product-definitions-schema/b4e25d51a50868f9d31be7e8ddb76f31927d81a6/schema/inputPorts.json",
   "title": "Data Product Definition Input Ports Schema",
   "type": "object",
   "required": ["metadata", "datasource", "dataset"],

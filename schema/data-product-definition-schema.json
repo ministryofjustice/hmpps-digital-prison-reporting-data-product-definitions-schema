@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://raw.githubusercontent.com/ministryofjustice/hmpps-digital-prison-reporting-data-product-definitions-schema/6f83dd4d8bb93998492372473edc4b2fc5f13d73/schema/data-product-definition-schema.json",
+  "$id": "https://raw.githubusercontent.com/ministryofjustice/hmpps-digital-prison-reporting-data-product-definitions-schema/b4e25d51a50868f9d31be7e8ddb76f31927d81a6/schema/data-product-definition-schema.json",
   "title": "Data Product Definition Schema",
   "type": "object",
   "required": ["id", "name", "metadata", "inputPorts", "outputPorts", "policy"],
@@ -26,19 +26,19 @@
     "inputPorts": {
       "type": "array",
       "items": {
-        "$ref": "inputPorts.json#/inputPorts"
+        "$ref": "inputPorts.json"
       }
     },
     "outputPorts": {
       "type": "array",
       "items": {
-        "$ref": "outputPorts.json#/outputPorts"
+        "$ref": "outputPorts.json"
       }
     },
     "policy": {
       "type": "array",
       "items": {
-        "$ref": "policy.json#"
+        "$ref": "policy.json"
       }
     }
   },
