@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://raw.githubusercontent.com/ministryofjustice/hmpps-digital-prison-reporting-data-product-definitions-schema/b4e25d51a50868f9d31be7e8ddb76f31927d81a6/schema/policy.json",
+  "$id": "https://raw.githubusercontent.com/ministryofjustice/hmpps-digital-prison-reporting-data-product-definitions-schema/483172c2c31b8cf051e428aa43db927d2c73b370/schema/policy.json",
   "title": "Data Product Definition Schema",
   "type": "object",
   "required": ["id", "type", "rule", "metadata"],
