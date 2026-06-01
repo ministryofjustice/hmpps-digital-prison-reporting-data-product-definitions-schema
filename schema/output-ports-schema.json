@@ -1,0 +1,669 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "datahub://dpd/outputPorts",
+  "title": "Data Product Definition Schema",
+  "type": "object",
+  "required": ["metadata", "report"],
+  "properties": {
+    "metadata": {
+      "$ref": "#/definitions/metadata"
+    },
+    "dashboard": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/dashboard"
+      }
+    },
+    "report": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/report"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "alias": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "dashboard": {
+      "type": "object",
+      "required": ["id", "name", "dataset", "section"],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "loadType": {
+          "enum": ["sync", "async"]
+        },
+        "dataset": {
+          "type": "string"
+        },
+        "section": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/dashboard-section-definition"
+          }
+        },
+        "filter": {
+          "$ref": "#/definitions/report-filter"
+        }
+      }
+    },
+    "dashboard-section-definition": {
+      "type": "object",
+      "required": ["id", "display", "visualisation"],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "display": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "visualisation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/dashboard-visualisation"
+          }
+        }
+      }
+    },
+    "metric": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "dataset",
+        "display",
+        "description",
+        "specification"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "dataset": {
+          "type": "string"
+        },
+        "display": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "specification": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/metric-specification"
+          }
+        }
+      }
+    },
+    "metric-specification": {
+      "type": "object",
+      "required": ["name", "display"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "display": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "group": {
+          "type": "boolean"
+        },
+        "chart": {
+          "type": "array",
+          "items": {
+            "enum": ["doughnut", "bar", "line"]
+          }
+        }
+      }
+    },
+    "dashboard-visualisation": {
+      "type": "object",
+      "required": ["id", "type", "display", "column"],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "scorecard-group",
+            "scorecard",
+            "line",
+            "bar-timeseries",
+            "bar",
+            "doughnut",
+            "list",
+            "matrix-timeseries",
+            "line-timeseries"
+          ]
+        },
+        "display": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "column": {
+          "type": "object",
+          "required": ["measure", "expectNull"],
+          "properties": {
+            "key": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/dashboard-visualisation-column"
+              }
+            },
+            "measure": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/dashboard-visualisation-column"
+              }
+            },
+            "filter": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/value-visualisation-column"
+              }
+            },
+            "expectNull": {
+              "type": "boolean"
+            }
+          }
+        },
+        "option": {
+          "$ref": "#/definitions/dashboard-visualisation-option"
+        }
+      }
+    },
+    "dashboard-visualisation-column": {
+      "type": "object",
+      "required": ["id"],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "display": {
+          "type": "string"
+        },
+        "aggregate": {
+          "enum": ["sum", "average"]
+        },
+        "unit": {
+          "enum": ["number", "percentage"]
+        },
+        "displayValue": {
+          "type": "boolean"
+        },
+        "axis": {
+          "type": "string"
+        },
+        "optional": {
+          "type": "boolean"
+        }
+      }
+    },
+    "value-visualisation-column": {
+      "type": "object",
+      "required": ["id", "equals"],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "equals": {
+          "type": "string"
+        }
+      }
+    },
+    "dashboard-visualisation-option": {
+      "type": "object",
+      "properties": {
+        "useRagColour": {
+          "type": "boolean",
+          "default": false
+        },
+        "baseColour": {
+          "type": "string"
+        },
+        "buckets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/dashboard-visualisation-option-bucket"
+          }
+        },
+        "showLatest": {
+          "type": "boolean",
+          "default": true
+        },
+        "columnsAsList": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
+    "dashboard-visualisation-option-bucket": {
+      "type": "object",
+      "properties": {
+        "min": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        },
+        "hexColour": {
+          "type": "boolean"
+        }
+      }
+    },
+    "filter": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "enum": [
+            "radio",
+            "select",
+            "daterange",
+            "date",
+            "autocomplete",
+            "text",
+            "granulardaterange",
+            "caseloads",
+            "multiselect"
+          ]
+        },
+        "default": {
+          "type": "string"
+        },
+        "pattern": {
+          "type": "string"
+        },
+        "mandatory": {
+          "type": "boolean"
+        },
+        "staticoptions": {
+          "$ref": "#/definitions/static-options"
+        },
+        "dynamicOptions": {
+          "$ref": "#/definitions/dynamic-options"
+        },
+        "min": {
+          "type": "string"
+        },
+        "max": {
+          "type": "string"
+        },
+        "minSelected": {
+          "type": "integer"
+        },
+        "maxSelected": {
+          "type": "integer"
+        },
+        "interactive": {
+          "type": "boolean"
+        },
+        "index": {
+          "type": "integer"
+        },
+        "defaultGranularity": {
+          "enum": [
+            "hourly",
+            "daily",
+            "weekly",
+            "monthly",
+            "quarterly",
+            "annually"
+          ]
+        },
+        "defaultQuickFilterValue": {
+          "enum": [
+            "today",
+            "yesterday",
+            "last-seven-days",
+            "last-thirty-days",
+            "last-month",
+            "last-full-month",
+            "last-ninety-days",
+            "last-three-months",
+            "last-full-three-months",
+            "last-year",
+            "last-full-year",
+            "tomorrow",
+            "next-seven-days",
+            "next-thirty-days",
+            "next-month",
+            "next-full-month",
+            "next-ninety-days",
+            "next-three-months",
+            "next-full-three-months",
+            "next-year",
+            "next-full-year"
+          ]
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["version"],
+      "properties": {
+        "author": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "tags": {
+          "$ref": "#/definitions/tags"
+        }
+      },
+      "additionalProperties": false
+    },
+    "report": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "version",
+        "dataset",
+        "render",
+        "specification"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "schedule": {
+          "type": "string"
+        },
+        "loadType": {
+          "enum": ["sync", "async"]
+        },
+        "created": {
+          "type": "string"
+        },
+        "modified": {
+          "type": "string"
+        },
+        "withdrawn": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "dataset": {
+          "type": "string"
+        },
+        "filter": {
+          "$ref": "#/definitions/report-filter"
+        },
+        "render": {
+          "enum": ["HTML", "HTML-child"]
+        },
+        "classification": {
+          "type": "string"
+        },
+        "specification": {
+          "$ref": "#/definitions/report-specification"
+        },
+        "summary": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/report-summary"
+          }
+        },
+        "child": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/report-child"
+          }
+        }
+      }
+    },
+    "report-filter": {
+      "type": "object",
+      "required": ["name", "query"],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "database": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "query": {
+          "type": "string"
+        }
+      }
+    },
+    "report-specification": {
+      "type": "object",
+      "required": ["template", "field"],
+      "properties": {
+        "template": {
+          "enum": [
+            "list",
+            "list-section",
+            "list-tab",
+            "summary",
+            "summary-section",
+            "parent-child",
+            "parent-child-section"
+          ]
+        },
+        "section": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "field": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/report-field"
+          }
+        }
+      }
+    },
+    "report-field": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "display": {
+          "type": "string"
+        },
+        "formula": {
+          "type": "string"
+        },
+        "visible": {
+          "enum": ["true", "false", "mandatory"]
+        },
+        "sortable": {
+          "type": "boolean"
+        },
+        "defaultsort": {
+          "type": "boolean"
+        },
+        "sortdirection": {
+          "enum": ["asc", "desc"]
+        },
+        "wordwrap": {
+          "enum": ["none", "normal", "break-words"]
+        },
+        "alias": {
+          "$ref": "#/definitions/alias"
+        },
+        "filter": {
+          "$ref": "#/definitions/filter"
+        },
+        "type": {
+          "enum": [
+            "boolean",
+            "int",
+            "long",
+            "float",
+            "double",
+            "string",
+            "date",
+            "time",
+            "datetime",
+            "timestamp"
+          ]
+        },
+        "header": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": true
+    },
+    "sensitivity": {
+      "enum": ["public", "private", "internal", "confidential", "restricted"],
+      "default": "public"
+    },
+    "static-options": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "display"],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "display": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "dynamic-options": {
+      "type": "object",
+      "required": ["returnAsStaticOptions"],
+      "properties": {
+        "minimumLength": {
+          "type": "integer"
+        },
+        "returnAsStaticOptions": {
+          "type": "boolean"
+        },
+        "maximumOptions": {
+          "type": "integer"
+        },
+        "dataset": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "display": {
+          "type": "string"
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "report-summary": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "dataset": {
+          "type": "string"
+        },
+        "template": {
+          "enum": [
+            "table-header",
+            "table-footer",
+            "section-header",
+            "section-footer",
+            "page-header",
+            "page-footer"
+          ]
+        },
+        "field": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/summary-field"
+          }
+        }
+      }
+    },
+    "summary-field": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "header": {
+          "type": "boolean"
+        },
+        "mergeRows": {
+          "type": "boolean"
+        }
+      }
+    },
+    "report-child": {
+      "type": "object",
+      "required": ["reportId", "joinField"],
+      "properties": {
+        "reportId": {
+          "type": "string"
+        },
+        "joinField": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
