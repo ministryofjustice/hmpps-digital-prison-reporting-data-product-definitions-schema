@@ -5,6 +5,9 @@
   "type": "object",
   "required": ["metadata", "datasource", "dataset"],
   "properties": {
+    "$schema": {
+      "type": "string"
+    },
     "metadata": {
       "$ref": "#/definitions/metadata"
     },

@@ -5,6 +5,9 @@
   "type": "object",
   "required": ["id", "type", "rule", "metadata"],
   "properties": {
+    "$schema": {
+      "type": "string"
+    },
     "metadata": {
       "$ref": "#/definitions/metadata"
     },
