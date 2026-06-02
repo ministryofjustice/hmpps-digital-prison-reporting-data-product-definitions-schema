@@ -20,6 +20,12 @@ jobs:
       - id: lint
         run: npm run format
 
+      - name: Replace ref in main schema for validation
+        run: sed -i "s/main/$(git rev-parse HEAD | tr -d '[:space:]')/g" schema/data-product-definition-schema.json
+
+      - name: Replace ref in test-dpd for validation
+        run: sed -i "s/main/$(git rev-parse HEAD | tr -d '[:space:]')/g" schema/test-dpd.json
+
       - name: Validate all the DPDs against the JSON schema
         id: validate-json
         run: npm run validate
