@@ -30,7 +30,7 @@ jobs:
         run: sed -i "s/main/$(git rev-parse HEAD | tr -d '[:space:]')/g" schema/2.0.0/data-product-definition-schema.json
 
       - name: Replace ref in test-dpd for validation
-        run: sed -i "s/main/$(git rev-parse HEAD | tr -d '[:space:]')/g" schema/2.0.0/test-dpd.json
+        run: sed -i "s/main/$(git rev-parse HEAD | tr -d '[:space:]')/g" scripts/test-dpd.json
 
       - name: Validate all the DPDs against the JSON schema
         id: validate-json
