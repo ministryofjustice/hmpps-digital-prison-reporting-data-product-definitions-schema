@@ -1,0 +1,714 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Data Product Definition Schema",
+  "type": "object",
+
+  "required": ["id", "name", "metadata", "datasource", "dataset", "report"],
+
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "scheduled": { "type": "boolean" },
+    "metadata": { "$ref": "#/definitions/metadata" },
+    "datasource": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/datasource" }
+    },
+    "dataset": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/dataset" }
+    },
+    "dashboard": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/dashboard" }
+    },
+    "policy": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/policy" }
+    },
+    "report": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/report" }
+    },
+    "errors": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/error" }
+    }
+  },
+
+  "additionalProperties": false,
+
+  "definitions": {
+    "alias": { "type": "array", "items": { "type": "string" } },
+
+    "datasource": {
+      "type": "object",
+      "required": ["id"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "connection": {
+          "enum": ["federated", "awsdatacatalog", "datawarehouse"]
+        },
+        "dialect": {
+          "enum": ["oracle/11g", "postgres/19", "redshift/4", "athena/3"]
+        },
+        "database": { "type": "string" },
+        "catalog": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+
+    "dataset": {
+      "type": "object",
+      "required": ["id", "name", "datasource", "query", "schema"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "schedule": { "type": "string" },
+        "datasource": { "type": "string" },
+        "parameters": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/dataset-parameter" }
+        },
+        "query": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/multiphaseQuery"
+              }
+            }
+          ]
+        },
+        "schema": {
+          "type": "object",
+          "required": ["field"],
+          "properties": {
+            "field": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/dataset-field" }
+            }
+          }
+        }
+      }
+    },
+
+    "dataset-field": {
+      "type": "object",
+      "required": ["name", "type"],
+      "properties": {
+        "index": { "type": "integer" },
+        "description": { "type": "string" },
+        "glossaryindex": { "type": "string" },
+        "name": { "type": "string" },
+        "display": { "type": "string" },
+        "piiindex": { "type": "string" },
+        "sensitivity": { "$ref": "#/definitions/sensitivity" },
+        "alias": { "$ref": "#/definitions/alias" },
+        "tags": { "$ref": "#/definitions/tags" },
+        "type": {
+          "enum": [
+            "null",
+            "boolean",
+            "int",
+            "long",
+            "float",
+            "double",
+            "bytes",
+            "string",
+            "date",
+            "time",
+            "datetime",
+            "timestamp"
+          ]
+        },
+        "filter": { "$ref": "#/definitions/filter" }
+      },
+      "additionalProperties": true
+    },
+
+    "dataset-parameter": {
+      "type": "object",
+      "required": ["name", "display", "reportFieldType"],
+      "properties": {
+        "default": {},
+        "description": { "type": "string" },
+        "display": { "type": "string" },
+        "index": { "type": "integer" },
+        "name": { "type": "string" },
+        "mandatory": { "enum": ["true", "false"] },
+        "filterType": { "type": "string" },
+        "reportFieldType": {
+          "enum": [
+            "null",
+            "boolean",
+            "int",
+            "long",
+            "float",
+            "double",
+            "bytes",
+            "string",
+            "date",
+            "time",
+            "datetime",
+            "timestamp"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+
+    "dashboard": {
+      "type": "object",
+      "required": ["id", "name", "dataset", "section"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "loadType": { "enum": ["sync", "async"] },
+        "dataset": { "type": "string" },
+        "section": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/dashboard-section-definition" }
+        },
+        "filter": { "$ref": "#/definitions/report-filter" }
+      }
+    },
+
+    "dashboard-section-definition": {
+      "type": "object",
+      "required": ["id", "display", "visualisation"],
+      "properties": {
+        "id": { "type": "string" },
+        "display": { "type": "string" },
+        "description": { "type": "string" },
+        "visualisation": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/dashboard-visualisation" }
+        }
+      }
+    },
+
+    "metric": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "dataset",
+        "display",
+        "description",
+        "specification"
+      ],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "dataset": { "type": "string" },
+        "display": { "type": "string" },
+        "description": { "type": "string" },
+        "specification": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/metric-specification"
+          }
+        }
+      }
+    },
+    "metric-specification": {
+      "type": "object",
+      "required": ["name", "display"],
+      "properties": {
+        "name": { "type": "string" },
+        "display": { "type": "string" },
+        "unit": { "type": "string" },
+        "group": { "type": "boolean" },
+        "chart": {
+          "type": "array",
+          "items": { "enum": ["doughnut", "bar", "line"] }
+        }
+      }
+    },
+    "dashboard-visualisation": {
+      "type": "object",
+      "required": ["id", "type", "display", "column"],
+      "properties": {
+        "id": { "type": "string" },
+        "type": {
+          "enum": [
+            "scorecard-group",
+            "scorecard",
+            "line",
+            "bar-timeseries",
+            "bar",
+            "doughnut",
+            "list",
+            "matrix-timeseries",
+            "line-timeseries"
+          ]
+        },
+        "display": { "type": "string" },
+        "description": { "type": "string" },
+        "column": {
+          "type": "object",
+          "required": ["measure", "expectNull"],
+          "properties": {
+            "key": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/dashboard-visualisation-column"
+              }
+            },
+            "measure": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/dashboard-visualisation-column"
+              }
+            },
+            "filter": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/value-visualisation-column" }
+            },
+            "expectNull": { "type": "boolean" }
+          }
+        },
+        "option": { "$ref": "#/definitions/dashboard-visualisation-option" }
+      }
+    },
+
+    "dashboard-visualisation-column": {
+      "type": "object",
+      "required": ["id"],
+      "properties": {
+        "id": { "type": "string" },
+        "display": { "type": "string" },
+        "aggregate": { "enum": ["sum", "average"] },
+        "unit": { "enum": ["number", "percentage"] },
+        "displayValue": { "type": "boolean" },
+        "axis": { "type": "string" },
+        "optional": { "type": "boolean" }
+      }
+    },
+
+    "value-visualisation-column": {
+      "type": "object",
+      "required": ["id", "equals"],
+      "properties": {
+        "id": { "type": "string" },
+        "equals": { "type": "string" }
+      }
+    },
+
+    "dashboard-visualisation-option": {
+      "type": "object",
+      "properties": {
+        "useRagColour": { "type": "boolean", "default": false },
+        "baseColour": { "type": "string" },
+        "buckets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/dashboard-visualisation-option-bucket"
+          }
+        },
+        "showLatest": { "type": "boolean", "default": true },
+        "columnsAsList": { "type": "boolean", "default": false }
+      }
+    },
+
+    "dashboard-visualisation-option-bucket": {
+      "type": "object",
+      "properties": {
+        "min": { "type": "number" },
+        "max": { "type": "number" },
+        "hexColour": { "type": "boolean" }
+      }
+    },
+
+    "filter": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "enum": [
+            "radio",
+            "select",
+            "daterange",
+            "date",
+            "autocomplete",
+            "text",
+            "granulardaterange",
+            "caseloads",
+            "multiselect"
+          ]
+        },
+        "default": { "type": "string" },
+        "pattern": { "type": "string" },
+        "mandatory": { "type": "boolean" },
+        "staticoptions": { "$ref": "#/definitions/static-options" },
+        "dynamicOptions": { "$ref": "#/definitions/dynamic-options" },
+        "min": { "type": "string" },
+        "max": { "type": "string" },
+        "minSelected": { "type": "integer" },
+        "maxSelected": { "type": "integer" },
+        "interactive": { "type": "boolean" },
+        "index": { "type": "integer" },
+        "defaultGranularity": {
+          "enum": [
+            "hourly",
+            "daily",
+            "weekly",
+            "monthly",
+            "quarterly",
+            "annually"
+          ]
+        },
+        "defaultQuickFilterValue": {
+          "enum": [
+            "today",
+            "yesterday",
+            "last-seven-days",
+            "last-thirty-days",
+            "last-month",
+            "last-full-month",
+            "last-ninety-days",
+            "last-three-months",
+            "last-full-three-months",
+            "last-year",
+            "last-full-year",
+            "tomorrow",
+            "next-seven-days",
+            "next-thirty-days",
+            "next-month",
+            "next-full-month",
+            "next-ninety-days",
+            "next-three-months",
+            "next-full-three-months",
+            "next-year",
+            "next-full-year"
+          ]
+        }
+      }
+    },
+
+    "metadata": {
+      "type": "object",
+      "required": ["version"],
+      "properties": {
+        "author": { "type": "string" },
+        "version": { "type": "string" },
+        "owner": { "type": "string" },
+        "tags": { "$ref": "#/definitions/tags" }
+      },
+      "additionalProperties": false
+    },
+
+    "policy": {
+      "type": "object",
+      "required": ["id", "type", "rule"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "type": {
+          "enum": [
+            "access",
+            "row-level",
+            "column-level",
+            "masking",
+            "privacy",
+            "geofencing",
+            "timefencing",
+            "propagation",
+            "retention"
+          ]
+        },
+        "action": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "rule": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/policy-rule" }
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "policy-rule": {
+      "type": "object",
+      "required": ["effect", "condition"],
+      "properties": {
+        "effect": { "enum": ["permit", "deny"], "default": "deny" },
+        "condition": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/policy-condition" }
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "policy-condition": {
+      "anyOf": [
+        { "$ref": "#/definitions/policy-condition-match" },
+        { "$ref": "#/definitions/policy-condition-nomatch" },
+        { "$ref": "#/definitions/policy-condition-like" },
+        { "$ref": "#/definitions/policy-condition-between" }
+      ]
+    },
+
+    "policy-condition-match": {
+      "type": "object",
+      "properties": {
+        "match": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+
+    "policy-condition-nomatch": {
+      "type": "object",
+      "properties": {
+        "notequals": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+
+    "policy-condition-like": {
+      "type": "object",
+      "properties": {
+        "like": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+
+    "policy-condition-between": {
+      "type": "object",
+      "properties": {
+        "between": {
+          "type": "object",
+          "required": ["value", "start", "end"],
+          "properties": {
+            "value": { "type": "string" },
+            "start": { "type": "string" },
+            "end": { "type": "string" }
+          }
+        }
+      }
+    },
+
+    "report": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "version",
+        "dataset",
+        "render",
+        "specification"
+      ],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "schedule": { "type": "string" },
+        "loadType": { "enum": ["sync", "async"] },
+        "created": { "type": "string" },
+        "modified": { "type": "string" },
+        "withdrawn": { "type": "string" },
+        "version": { "type": "string" },
+        "dataset": { "type": "string" },
+        "filter": { "$ref": "#/definitions/report-filter" },
+        "render": { "enum": ["HTML", "HTML-child"] },
+        "classification": { "type": "string" },
+        "specification": { "$ref": "#/definitions/report-specification" },
+        "summary": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/report-summary" }
+        },
+        "child": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/report-child" }
+        }
+      }
+    },
+
+    "report-filter": {
+      "type": "object",
+      "required": ["name", "query"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "database": { "type": "string" },
+        "version": { "type": "string" },
+        "query": { "type": "string" }
+      }
+    },
+
+    "report-specification": {
+      "type": "object",
+      "required": ["template", "field"],
+      "properties": {
+        "template": {
+          "enum": [
+            "list",
+            "list-section",
+            "list-tab",
+            "summary",
+            "summary-section",
+            "parent-child",
+            "parent-child-section"
+          ]
+        },
+        "section": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "field": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/report-field" }
+        }
+      }
+    },
+
+    "report-field": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "description": { "type": "string" },
+        "name": { "type": "string" },
+        "display": { "type": "string" },
+        "formula": { "type": "string" },
+        "visible": { "enum": ["true", "false", "mandatory"] },
+        "sortable": { "type": "boolean" },
+        "defaultsort": { "type": "boolean" },
+        "sortdirection": { "enum": ["asc", "desc"] },
+        "wordwrap": { "enum": ["none", "normal", "break-words"] },
+        "alias": { "$ref": "#/definitions/alias" },
+        "filter": { "$ref": "#/definitions/filter" },
+        "type": {
+          "enum": [
+            "boolean",
+            "int",
+            "long",
+            "float",
+            "double",
+            "string",
+            "date",
+            "time",
+            "datetime",
+            "timestamp"
+          ]
+        },
+        "header": { "type": "boolean" }
+      },
+      "additionalProperties": true
+    },
+
+    "sensitivity": {
+      "enum": ["public", "private", "internal", "confidential", "restricted"],
+      "default": "public"
+    },
+
+    "static-options": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "display"],
+        "properties": {
+          "name": { "type": "string" },
+          "display": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "dynamic-options": {
+      "type": "object",
+      "required": ["returnAsStaticOptions"],
+      "properties": {
+        "minimumLength": { "type": "integer" },
+        "returnAsStaticOptions": { "type": "boolean" },
+        "maximumOptions": { "type": "integer" },
+        "dataset": { "type": "string" },
+        "name": { "type": "string" },
+        "display": { "type": "string" }
+      }
+    },
+
+    "tags": { "type": "array", "items": { "type": "string" } },
+
+    "report-summary": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "dataset": { "type": "string" },
+        "template": {
+          "enum": [
+            "table-header",
+            "table-footer",
+            "section-header",
+            "section-footer",
+            "page-header",
+            "page-footer"
+          ]
+        },
+        "field": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/summary-field" }
+        }
+      }
+    },
+
+    "summary-field": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "header": { "type": "boolean" },
+        "mergeRows": { "type": "boolean" }
+      }
+    },
+
+    "error": {
+      "type": "object",
+      "properties": {
+        "type": { "type": "string" },
+        "error": { "type": "string" },
+        "entityId": { "type": "string" },
+        "entityType": { "type": "string" }
+      }
+    },
+
+    "report-child": {
+      "type": "object",
+      "required": ["reportId", "joinField"],
+      "properties": {
+        "reportId": { "type": "string" },
+        "joinField": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "multiphaseQuery": {
+      "type": "object",
+      "required": ["index", "datasource", "query"],
+      "properties": {
+        "index": { "type": "integer" },
+        "datasource": { "type": "string" },
+        "query": { "type": "string" },
+        "parameters": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/dataset-parameter" }
+        }
+      }
+    }
+  }
+}
