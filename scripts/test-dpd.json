@@ -1,5 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/ministryofjustice/hmpps-digital-prison-reporting-data-product-definitions-schema/main/schema/2.0.0/data-product-definition-schema.json",
+  "schemaversion": "2.0.0",
   "id": "test-id",
   "name": "some-name-here",
   "description": "a description",
