@@ -7,7 +7,7 @@
   "scripts": {
     "validate": "node scripts/validateDpdsSchemaCompliance.js",
     "format": "prettier schema/*.json",
-    "format:fix": "prettier schema/*.json -w",
+    "format:fix": "prettier schema/**/*.json -w",
     "setup": "npm ci && hmpps-npm-script-run-allowlist"
   },
   "devDependencies": {
