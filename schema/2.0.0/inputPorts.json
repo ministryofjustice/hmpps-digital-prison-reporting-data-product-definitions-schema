@@ -303,7 +303,9 @@
       "type": "object",
       "required": ["name", "display", "reportFieldType"],
       "properties": {
-        "default": {},
+        "default": {
+          "type": "string"
+        },
         "description": {
           "type": "string"
         },
