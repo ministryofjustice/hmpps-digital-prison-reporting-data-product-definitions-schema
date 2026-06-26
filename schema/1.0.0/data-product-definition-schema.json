@@ -333,7 +333,7 @@
         "id": { "type": "string" },
         "name": { "type": "string" },
         "description": { "type": "string" },
-        "type": { "enum": ["access", "row-level", "column-level", "masking", "privacy", "geofencing", "timefencing", "propagation", "retention"] },
+        "type": { "enum": ["access", "row-level", "column-level", "masking", "privacy", "geofencing", "timefencing", "propagation", "retention", "lao"] },
         "action": {
           "type": "array",
           "items": { "type": "string" }

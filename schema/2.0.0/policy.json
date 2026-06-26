@@ -30,7 +30,8 @@
         "geofencing",
         "timefencing",
         "propagation",
-        "retention"
+        "retention",
+        "lao"
       ]
     },
     "action": {
