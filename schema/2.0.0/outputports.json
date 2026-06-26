@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "/outputPorts",
+  "$id": "/outputports",
   "title": "Data Product Definition Schema",
   "type": "object",
   "required": ["metadata", "report"],

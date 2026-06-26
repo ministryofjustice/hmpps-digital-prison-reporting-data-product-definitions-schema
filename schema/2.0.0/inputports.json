@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "/inputPorts",
+  "$id": "/inputports",
   "title": "Data Product Definition Input Ports Schema",
   "type": "object",
   "required": ["metadata", "datasource", "dataset"],

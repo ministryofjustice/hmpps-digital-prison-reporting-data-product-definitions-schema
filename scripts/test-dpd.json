@@ -8,7 +8,7 @@
     "version": "1.0.0",
     "tags": ["a tag"]
   },
-  "inputPorts": [
+  "inputports": [
     {
       "metadata": {
         "version": "1.0.0"
@@ -72,7 +72,7 @@
       ]
     }
   ],
-  "outputPorts": [
+  "outputports": [
     {
       "metadata": {
         "version": "1.0.0"

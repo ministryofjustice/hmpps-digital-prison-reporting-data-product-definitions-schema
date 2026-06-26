@@ -8,8 +8,8 @@
     "schemaversion",
     "name",
     "metadata",
-    "inputPorts",
-    "outputPorts",
+    "inputports",
+    "outputports",
     "policy"
   ],
   "properties": {
@@ -34,16 +34,16 @@
     "metadata": {
       "$ref": "#/definitions/metadata"
     },
-    "inputPorts": {
+    "inputports": {
       "type": "array",
       "items": {
-        "$ref": "inputPorts.json"
+        "$ref": "inputports.json"
       }
     },
-    "outputPorts": {
+    "outputports": {
       "type": "array",
       "items": {
-        "$ref": "outputPorts.json"
+        "$ref": "outputports.json"
       }
     },
     "policy": {

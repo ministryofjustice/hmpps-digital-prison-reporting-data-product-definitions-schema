@@ -48,12 +48,8 @@
       "properties": {
         "id": { "type": "string" },
         "name": { "type": "string" },
-        "connection": {
-          "enum": ["federated", "awsdatacatalog", "datawarehouse"]
-        },
-        "dialect": {
-          "enum": ["oracle/11g", "postgres/19", "redshift/4", "athena/3"]
-        },
+        "connection": { "enum": ["federated", "awsdatacatalog", "datawarehouse"] },
+        "dialect": { "enum": ["oracle/11g", "postgres/19", "redshift/4", "athena/3"]},
         "database": { "type": "string" },
         "catalog": { "type": "string" }
       },
@@ -112,22 +108,7 @@
         "sensitivity": { "$ref": "#/definitions/sensitivity" },
         "alias": { "$ref": "#/definitions/alias" },
         "tags": { "$ref": "#/definitions/tags" },
-        "type": {
-          "enum": [
-            "null",
-            "boolean",
-            "int",
-            "long",
-            "float",
-            "double",
-            "bytes",
-            "string",
-            "date",
-            "time",
-            "datetime",
-            "timestamp"
-          ]
-        },
+        "type": { "enum": ["null", "boolean", "int", "long", "float", "double", "bytes", "string", "date", "time", "datetime", "timestamp"] },
         "filter": { "$ref": "#/definitions/filter" }
       },
       "additionalProperties": true
@@ -135,7 +116,7 @@
 
     "dataset-parameter": {
       "type": "object",
-      "required": ["name", "display", "reportFieldType"],
+      "required": ["name", "display","reportFieldType"],
       "properties": {
         "default": { "type": "string" },
         "description": { "type": "string" },
@@ -144,22 +125,7 @@
         "name": { "type": "string" },
         "mandatory": { "enum": ["true", "false"] },
         "filterType": { "type": "string" },
-        "reportFieldType": {
-          "enum": [
-            "null",
-            "boolean",
-            "int",
-            "long",
-            "float",
-            "double",
-            "bytes",
-            "string",
-            "date",
-            "time",
-            "datetime",
-            "timestamp"
-          ]
-        }
+        "reportFieldType": { "enum": ["null", "boolean", "int", "long", "float", "double", "bytes", "string", "date", "time", "datetime", "timestamp"] }
       },
       "additionalProperties": true
     },
@@ -168,10 +134,10 @@
       "type": "object",
       "required": ["id", "name", "dataset", "section"],
       "properties": {
-        "id": { "type": "string" },
-        "name": { "type": "string" },
-        "description": { "type": "string" },
-        "loadType": { "enum": ["sync", "async"] },
+        "id":  { "type": "string" },
+        "name":  { "type": "string" },
+        "description":  { "type": "string" },
+        "loadType":  { "enum": ["sync", "async"]},
         "dataset": { "type": "string" },
         "section": {
           "type": "array",
@@ -185,7 +151,7 @@
       "type": "object",
       "required": ["id", "display", "visualisation"],
       "properties": {
-        "id": { "type": "string" },
+        "id":  { "type": "string" },
         "display": { "type": "string" },
         "description": { "type": "string" },
         "visualisation": {
@@ -197,14 +163,7 @@
 
     "metric": {
       "type": "object",
-      "required": [
-        "id",
-        "name",
-        "dataset",
-        "display",
-        "description",
-        "specification"
-      ],
+      "required": ["id", "name", "dataset", "display", "description", "specification"],
       "properties": {
         "id": { "type": "string" },
         "name": { "type": "string" },
@@ -223,57 +182,41 @@
       "type": "object",
       "required": ["name", "display"],
       "properties": {
-        "name": { "type": "string" },
-        "display": { "type": "string" },
-        "unit": { "type": "string" },
-        "group": { "type": "boolean" },
+        "name": {"type": "string"},
+        "display": {"type": "string"},
+        "unit": {"type": "string"},
+        "group": {"type":  "boolean"},
         "chart": {
           "type": "array",
-          "items": { "enum": ["doughnut", "bar", "line"] }
+          "items":  { "enum": ["doughnut","bar","line"] }
         }
       }
     },
     "dashboard-visualisation": {
       "type": "object",
-      "required": ["id", "type", "display", "column"],
+      "required": ["id","type", "display","column"],
       "properties": {
-        "id": { "type": "string" },
-        "type": {
-          "enum": [
-            "scorecard-group",
-            "scorecard",
-            "line",
-            "bar-timeseries",
-            "bar",
-            "doughnut",
-            "list",
-            "matrix-timeseries",
-            "line-timeseries"
-          ]
-        },
-        "display": { "type": "string" },
-        "description": { "type": "string" },
+        "id": {"type": "string"},
+        "type": { "enum": ["scorecard-group","scorecard","line","bar-timeseries","bar","doughnut", "list", "matrix-timeseries", "line-timeseries"] },
+        "display": {"type": "string"},
+        "description": {"type": "string"},
         "column": {
           "type": "object",
           "required": ["measure", "expectNull"],
           "properties": {
             "key": {
               "type": "array",
-              "items": {
-                "$ref": "#/definitions/dashboard-visualisation-column"
-              }
+              "items": { "$ref": "#/definitions/dashboard-visualisation-column" }
             },
             "measure": {
               "type": "array",
-              "items": {
-                "$ref": "#/definitions/dashboard-visualisation-column"
-              }
+              "items": { "$ref": "#/definitions/dashboard-visualisation-column" }
             },
             "filter": {
               "type": "array",
               "items": { "$ref": "#/definitions/value-visualisation-column" }
             },
-            "expectNull": { "type": "boolean" }
+            "expectNull": {"type": "boolean"}
           }
         },
         "option": { "$ref": "#/definitions/dashboard-visualisation-option" }
@@ -284,13 +227,13 @@
       "type": "object",
       "required": ["id"],
       "properties": {
-        "id": { "type": "string" },
-        "display": { "type": "string" },
-        "aggregate": { "enum": ["sum", "average"] },
-        "unit": { "enum": ["number", "percentage"] },
-        "displayValue": { "type": "boolean" },
-        "axis": { "type": "string" },
-        "optional": { "type": "boolean" }
+        "id": {"type": "string"},
+        "display": {"type": "string"},
+        "aggregate": {"enum": ["sum", "average"] },
+        "unit": {"enum": ["number", "percentage"] },
+        "displayValue": {"type": "boolean"},
+        "axis": {"type": "string"},
+        "optional": {"type": "boolean"}
       }
     },
 
@@ -298,33 +241,31 @@
       "type": "object",
       "required": ["id", "equals"],
       "properties": {
-        "id": { "type": "string" },
-        "equals": { "type": "string" }
+        "id": {"type": "string"},
+        "equals": {"type": "string"}
       }
     },
 
     "dashboard-visualisation-option": {
       "type": "object",
       "properties": {
-        "useRagColour": { "type": "boolean", "default": false },
-        "baseColour": { "type": "string" },
+        "useRagColour": {"type": "boolean", "default": false },
+        "baseColour": {"type": "string"},
         "buckets": {
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/dashboard-visualisation-option-bucket"
-          }
+          "items": { "$ref": "#/definitions/dashboard-visualisation-option-bucket" }
         },
-        "showLatest": { "type": "boolean", "default": true },
-        "columnsAsList": { "type": "boolean", "default": false }
+        "showLatest": {"type": "boolean", "default": true },
+        "columnsAsList": {"type": "boolean", "default": false }
       }
     },
 
     "dashboard-visualisation-option-bucket": {
       "type": "object",
       "properties": {
-        "min": { "type": "number" },
-        "max": { "type": "number" },
-        "hexColour": { "type": "boolean" }
+        "min": {"type": "number"},
+        "max": {"type": "number"},
+        "hexColour": {"type": "boolean"}
       }
     },
 
@@ -332,40 +273,19 @@
       "type": "object",
       "required": ["type"],
       "properties": {
-        "type": {
-          "enum": [
-            "radio",
-            "select",
-            "daterange",
-            "date",
-            "autocomplete",
-            "text",
-            "granulardaterange",
-            "caseloads",
-            "multiselect"
-          ]
-        },
+        "type": { "enum": ["radio", "select", "daterange", "date", "autocomplete", "text", "granulardaterange", "caseloads", "multiselect"] },
         "default": { "type": "string" },
         "pattern": { "type": "string" },
         "mandatory": { "type": "boolean" },
         "staticoptions": { "$ref": "#/definitions/static-options" },
-        "dynamicOptions": { "$ref": "#/definitions/dynamic-options" },
+        "dynamicOptions": {"$ref": "#/definitions/dynamic-options" },
         "min": { "type": "string" },
         "max": { "type": "string" },
-        "minSelected": { "type": "integer" },
-        "maxSelected": { "type": "integer" },
+        "minSelected": {"type":  "integer"},
+        "maxSelected": {"type":  "integer"},
         "interactive": { "type": "boolean" },
-        "index": { "type": "integer" },
-        "defaultGranularity": {
-          "enum": [
-            "hourly",
-            "daily",
-            "weekly",
-            "monthly",
-            "quarterly",
-            "annually"
-          ]
-        },
+        "index": {"type":  "integer"},
+        "defaultGranularity": {"enum": ["hourly", "daily", "weekly", "monthly", "quarterly", "annually"] },
         "defaultQuickFilterValue": {
           "enum": [
             "today",
@@ -413,19 +333,7 @@
         "id": { "type": "string" },
         "name": { "type": "string" },
         "description": { "type": "string" },
-        "type": {
-          "enum": [
-            "access",
-            "row-level",
-            "column-level",
-            "masking",
-            "privacy",
-            "geofencing",
-            "timefencing",
-            "propagation",
-            "retention"
-          ]
-        },
+        "type": { "enum": ["access", "row-level", "column-level", "masking", "privacy", "geofencing", "timefencing", "propagation", "retention"] },
         "action": {
           "type": "array",
           "items": { "type": "string" }
@@ -507,20 +415,13 @@
 
     "report": {
       "type": "object",
-      "required": [
-        "id",
-        "name",
-        "version",
-        "dataset",
-        "render",
-        "specification"
-      ],
+      "required": ["id", "name", "version", "dataset", "render", "specification"],
       "properties": {
         "id": { "type": "string" },
         "name": { "type": "string" },
         "description": { "type": "string" },
         "schedule": { "type": "string" },
-        "loadType": { "enum": ["sync", "async"] },
+        "loadType":  { "enum": ["sync", "async"]},
         "created": { "type": "string" },
         "modified": { "type": "string" },
         "withdrawn": { "type": "string" },
@@ -530,14 +431,8 @@
         "render": { "enum": ["HTML", "HTML-child"] },
         "classification": { "type": "string" },
         "specification": { "$ref": "#/definitions/report-specification" },
-        "summary": {
-          "type": "array",
-          "items": { "$ref": "#/definitions/report-summary" }
-        },
-        "child": {
-          "type": "array",
-          "items": { "$ref": "#/definitions/report-child" }
-        }
+        "summary": { "type": "array", "items": { "$ref": "#/definitions/report-summary" } },
+        "child": { "type": "array", "items": { "$ref": "#/definitions/report-child" } }
       }
     },
 
@@ -558,17 +453,7 @@
       "type": "object",
       "required": ["template", "field"],
       "properties": {
-        "template": {
-          "enum": [
-            "list",
-            "list-section",
-            "list-tab",
-            "summary",
-            "summary-section",
-            "parent-child",
-            "parent-child-section"
-          ]
-        },
+        "template": { "enum": ["list", "list-section", "list-tab", "summary", "summary-section", "parent-child", "parent-child-section"] },
         "section": {
           "type": "array",
           "items": { "type": "string" }
@@ -595,20 +480,7 @@
         "wordwrap": { "enum": ["none", "normal", "break-words"] },
         "alias": { "$ref": "#/definitions/alias" },
         "filter": { "$ref": "#/definitions/filter" },
-        "type": {
-          "enum": [
-            "boolean",
-            "int",
-            "long",
-            "float",
-            "double",
-            "string",
-            "date",
-            "time",
-            "datetime",
-            "timestamp"
-          ]
-        },
+        "type": { "enum": ["boolean", "int", "long", "float", "double", "string", "date", "time", "datetime", "timestamp"] },
         "header": { "type": "boolean" }
       },
       "additionalProperties": true
@@ -652,16 +524,7 @@
       "properties": {
         "id": { "type": "string" },
         "dataset": { "type": "string" },
-        "template": {
-          "enum": [
-            "table-header",
-            "table-footer",
-            "section-header",
-            "section-footer",
-            "page-header",
-            "page-footer"
-          ]
-        },
+        "template": { "enum": ["table-header", "table-footer", "section-header", "section-footer", "page-header", "page-footer"] },
         "field": {
           "type": "array",
           "items": { "$ref": "#/definitions/summary-field" }
@@ -679,8 +542,7 @@
       }
     },
 
-    "error": {
-      "type": "object",
+    "error": { "type": "object",
       "properties": {
         "type": { "type": "string" },
         "error": { "type": "string" },
