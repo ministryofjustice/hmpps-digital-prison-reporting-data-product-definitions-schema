@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/ministryofjustice/hmpps-digital-prison-reporting-data-product-definitions-schema/main/schema/2.0.0/data-product-definition-schema.json",
+  "title": "Data Product Definition Schema",
+  "type": "object",
+  "required": [
+    "id",
+    "schemaversion",
+    "name",
+    "metadata",
+    "inputports",
+    "outputports",
+    "policy"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schemaversion": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "scheduled": {
+      "type": "boolean"
+    },
+    "metadata": {
+      "$ref": "#/definitions/metadata"
+    },
+    "inputports": {
+      "type": "array",
+      "items": {
+        "$ref": "inputports.json"
+      }
+    },
+    "outputports": {
+      "type": "array",
+      "items": {
+        "$ref": "outputports.json"
+      }
+    },
+    "policy": {
+      "type": "array",
+      "items": {
+        "$ref": "policy.json"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "metadata": {
+      "type": "object",
+      "required": ["version"],
+      "properties": {
+        "author": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "tags": {
+          "$ref": "#/definitions/tags"
+        }
+      },
+      "additionalProperties": false
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

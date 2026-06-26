@@ -1,0 +1,387 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "/inputports",
+  "title": "Data Product Definition Input Ports Schema",
+  "type": "object",
+  "required": ["metadata", "datasource", "dataset"],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "metadata": {
+      "$ref": "#/definitions/metadata"
+    },
+    "dataset": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/dataset"
+      }
+    },
+    "datasource": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/datasource"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "alias": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "datasource": {
+      "type": "object",
+      "required": ["id"],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "connection": {
+          "enum": ["federated", "awsdatacatalog", "datawarehouse"]
+        },
+        "dialect": {
+          "enum": ["oracle/11g", "postgres/19", "redshift/4", "athena/3"]
+        },
+        "database": {
+          "type": "string"
+        },
+        "catalog": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "dataset": {
+      "type": "object",
+      "required": ["id", "name", "datasource", "query", "schema"],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "schedule": {
+          "type": "string"
+        },
+        "datasource": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/dataset-parameter"
+          }
+        },
+        "query": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/multiphaseQuery"
+              }
+            }
+          ]
+        },
+        "schema": {
+          "type": "object",
+          "required": ["field"],
+          "properties": {
+            "field": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/dataset-field"
+              }
+            }
+          }
+        }
+      }
+    },
+    "static-options": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "display"],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "display": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sensitivity": {
+      "enum": ["public", "private", "internal", "confidential", "restricted"],
+      "default": "public"
+    },
+    "filter": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "enum": [
+            "radio",
+            "select",
+            "daterange",
+            "date",
+            "autocomplete",
+            "text",
+            "granulardaterange",
+            "caseloads",
+            "multiselect"
+          ]
+        },
+        "default": {
+          "type": "string"
+        },
+        "pattern": {
+          "type": "string"
+        },
+        "mandatory": {
+          "type": "boolean"
+        },
+        "staticoptions": {
+          "$ref": "#/definitions/static-options"
+        },
+        "dynamicOptions": {
+          "$ref": "#/definitions/dynamic-options"
+        },
+        "min": {
+          "type": "string"
+        },
+        "max": {
+          "type": "string"
+        },
+        "minSelected": {
+          "type": "integer"
+        },
+        "maxSelected": {
+          "type": "integer"
+        },
+        "interactive": {
+          "type": "boolean"
+        },
+        "index": {
+          "type": "integer"
+        },
+        "defaultGranularity": {
+          "enum": [
+            "hourly",
+            "daily",
+            "weekly",
+            "monthly",
+            "quarterly",
+            "annually"
+          ]
+        },
+        "defaultQuickFilterValue": {
+          "enum": [
+            "today",
+            "yesterday",
+            "last-seven-days",
+            "last-thirty-days",
+            "last-month",
+            "last-full-month",
+            "last-ninety-days",
+            "last-three-months",
+            "last-full-three-months",
+            "last-year",
+            "last-full-year",
+            "tomorrow",
+            "next-seven-days",
+            "next-thirty-days",
+            "next-month",
+            "next-full-month",
+            "next-ninety-days",
+            "next-three-months",
+            "next-full-three-months",
+            "next-year",
+            "next-full-year"
+          ]
+        }
+      }
+    },
+    "dynamic-options": {
+      "type": "object",
+      "required": ["returnAsStaticOptions"],
+      "properties": {
+        "minimumLength": {
+          "type": "integer"
+        },
+        "returnAsStaticOptions": {
+          "type": "boolean"
+        },
+        "maximumOptions": {
+          "type": "integer"
+        },
+        "dataset": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "display": {
+          "type": "string"
+        }
+      }
+    },
+    "dataset-field": {
+      "type": "object",
+      "required": ["name", "type"],
+      "properties": {
+        "index": {
+          "type": "integer"
+        },
+        "description": {
+          "type": "string"
+        },
+        "glossaryindex": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "display": {
+          "type": "string"
+        },
+        "piiindex": {
+          "type": "string"
+        },
+        "sensitivity": {
+          "$ref": "#/definitions/sensitivity"
+        },
+        "alias": {
+          "$ref": "#/definitions/alias"
+        },
+        "tags": {
+          "$ref": "#/definitions/tags"
+        },
+        "type": {
+          "enum": [
+            "null",
+            "boolean",
+            "int",
+            "long",
+            "float",
+            "double",
+            "bytes",
+            "string",
+            "date",
+            "time",
+            "datetime",
+            "timestamp"
+          ]
+        },
+        "filter": {
+          "$ref": "#/definitions/filter"
+        }
+      },
+      "additionalProperties": true
+    },
+    "dataset-parameter": {
+      "type": "object",
+      "required": ["name", "display", "reportFieldType"],
+      "properties": {
+        "default": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "display": {
+          "type": "string"
+        },
+        "index": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "mandatory": {
+          "enum": ["true", "false"]
+        },
+        "filterType": {
+          "type": "string"
+        },
+        "reportFieldType": {
+          "enum": [
+            "null",
+            "boolean",
+            "int",
+            "long",
+            "float",
+            "double",
+            "bytes",
+            "string",
+            "date",
+            "time",
+            "datetime",
+            "timestamp"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["version"],
+      "properties": {
+        "author": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "tags": {
+          "$ref": "#/definitions/tags"
+        }
+      },
+      "additionalProperties": false
+    },
+    "multiphaseQuery": {
+      "type": "object",
+      "required": ["index", "datasource", "query"],
+      "properties": {
+        "index": {
+          "type": "integer"
+        },
+        "datasource": {
+          "type": "string"
+        },
+        "query": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/dataset-parameter"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,139 @@
+{
+  "$schema": "https://raw.githubusercontent.com/ministryofjustice/hmpps-digital-prison-reporting-data-product-definitions-schema/main/schema/2.0.0/data-product-definition-schema.json",
+  "schemaversion": "2.0.0",
+  "id": "test-id",
+  "name": "some-name-here",
+  "description": "a description",
+  "metadata": {
+    "version": "1.0.0",
+    "tags": ["a tag"]
+  },
+  "inputports": [
+    {
+      "metadata": {
+        "version": "1.0.0"
+      },
+      "datasource": [
+        {
+          "id": "somesource",
+          "name": "SOMESOURCE",
+          "database": "A_DATABASE",
+          "catalog": "acatalog"
+        }
+      ],
+      "dataset": [
+        {
+          "id": "id-123",
+          "name": "Some dataset name",
+          "description": "A dataset description",
+          "datasource": "nomis",
+          "query": "dataset_base_ AS (SELECT COL1 FROM FOO), dataset_ AS (SELECT COL2 FROM bar)",
+          "parameters": [
+            {
+              "index": 0,
+              "name": "some_name",
+              "filterType": "autocomplete",
+              "referenceType": "existingtype",
+              "reportFieldType": "string",
+              "display": "Display name",
+              "description": "",
+              "mandatory": "true"
+            }
+          ],
+          "schema": {
+            "field": [
+              {
+                "index": 0,
+                "name": "field_1",
+                "type": "string",
+                "display": "Field 1",
+                "legacyId": "asd.123",
+                "legacySqlClass": "column"
+              },
+              {
+                "index": 0,
+                "name": "field_2",
+                "type": "string",
+                "display": "Field 2",
+                "legacyId": "asd.45",
+                "legacySqlClass": "column"
+              },
+              {
+                "index": 0,
+                "name": "field_3",
+                "type": "string",
+                "display": "Field 3",
+                "legacyId": "asd.6573",
+                "legacySqlClass": "column"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "outputports": [
+    {
+      "metadata": {
+        "version": "1.0.0"
+      },
+      "report": [
+        {
+          "id": "12356.AA",
+          "name": "Report name goes here - this will be displayed",
+          "classification": "OFFICIAL",
+          "version": "1.0.0",
+          "render": "HTML",
+          "dataset": "1122344/AA11",
+          "feature": [
+            {
+              "type": "print"
+            }
+          ],
+          "specification": {
+            "template": "list",
+            "field": [
+              {
+                "name": "$ref:COL1",
+                "display": "Col display name",
+                "formula": "",
+                "visible": "true",
+                "sortable": true,
+                "defaultsort": true
+              },
+              {
+                "name": "$ref:COL2",
+                "display": "Col 2 display name",
+                "formula": "",
+                "visible": "true",
+                "sortable": false,
+                "defaultsort": false
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "policy": [
+    {
+      "metadata": {
+        "version": "1.0.0"
+      },
+      "id": "access",
+      "description": "",
+      "name": "",
+      "type": "access",
+      "rule": [
+        {
+          "effect": "permit",
+          "condition": [
+            {
+              "match": ["${role}", "SOME_ROLE"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

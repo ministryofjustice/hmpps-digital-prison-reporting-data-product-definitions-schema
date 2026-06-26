@@ -1,0 +1,17 @@
+{
+  "name": "dpd-schema",
+  "private": true,
+  "dependencies": {
+    "ajv": "8.20.0"
+  },
+  "scripts": {
+    "validate": "node scripts/validateDpdsSchemaCompliance.js",
+    "format": "prettier schema/**/*.json",
+    "format:fix": "prettier schema/**/*.json -w",
+    "setup": "npm ci && hmpps-npm-script-run-allowlist"
+  },
+  "devDependencies": {
+    "@ministryofjustice/hmpps-npm-script-allowlist": "0.0.6",
+    "prettier": "3.8.3"
+  }
+}
