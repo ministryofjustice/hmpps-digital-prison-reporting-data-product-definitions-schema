@@ -6,7 +6,7 @@ A Data Production Definition (DPD) describes where to find and how to display da
 
 # DPD sections
 
-## datasource
+## Datasource
 
 The datasource section shows where a dataset should source its data from. This could be the DPR RedShift (AKA `datamart`), NOMIS, or other data source.
 #### For multiphase queries the datasource of each query is referencing the datasource object defined at the top DPD level which has the following required fields:
@@ -49,7 +49,7 @@ For more details refer to [this document](https://github.com/ministryofjustice/h
 and search for `Spring DataSource configuration`.
 
 
-## dataset
+## Dataset
 
 Each DPD contains at least one dataset, often several.
 
@@ -75,11 +75,13 @@ There are three types of dataset:
   - For example a report may have an `Establishment` filter, which could use a caseload-limited list of establishments queried from the establishments table.
   - See "Filters" in the "Notable Features" section below.
 
-## policy
+## Policy
 
 The policy section contains a series of rules to be applied to the dataset results. This could be a simple "permit" to people with the correct role, or often a filter based on the user's active caseload. This is applied as a part of the SQL query as a Common Table Expression.
 
 By default, no rows will be shown - access needs to be explicitly permitted.
+
+### Global policies
 
 Example of granting access by role:
 ```json
@@ -142,7 +144,46 @@ Example of granting access any caseload a user has:
     }
   ],
 ```
-## report
+
+### Cross-domain non-global policies
+
+There are also cross-domain, but not global, policies. These may be applied to many different domains or a set of domains, but won't make sense in all domains.
+
+`lao` type policy is one of these. All DPDs executing in a Probation context must have an `lao` type policy of either `permit` or `deny`. A `permit` policy affirms that the current DPD is not surfacing any LAO data that can be specifically linked back to individual People on Probation, such as when your DPD only outputs aggregated data. It is *your* responsibility to check and affirm this, not Datahub's or anyone else's.
+
+Example of an LAO permit policy:
+```json
+"policy": [
+  {
+    "id": "lao_policy",
+    "type": "lao",
+    "rule": [
+      {
+        "effect": "permit"
+      }
+    ]
+  }
+]
+```
+
+A `deny` policy also must specify the column that contains the CRNs of the Persons on Probation, which goes in the `action` array. An `lao` type `deny` policy _must_ specify a column in this action array, else this DPD will not be valid. For example:
+```json
+"policy": [
+  {
+    "id": "lao_policy",
+    "type": "lao",
+    "action": ["crn"],
+    "rule": [
+      {
+        "effect": "deny"
+      }
+    ]
+  }
+]
+```
+
+
+## Report
 
 Each DPD contains zero or more reports (called a Variant in the UI). These are different ways to display the data from a dataset in list (or list-like) form.
 
@@ -215,10 +256,6 @@ As well as the standard ID, name, description, etc. each report contains:
 An example of a DPD with a dashboard can be found [here](https://github.com/ministryofjustice/hmpps-dpr-data-product-definitions/blob/main/dpd/dev/definitions/prisons/orphanage/mis-daru-incident-tracker.json#L183).
 <br>For further information regarding dashboard usage you can refer to [these docs](https://ministryofjustice.github.io/hmpps-digital-prison-reporting-frontend/dashboards/definitions/dashboard-definition/).
 <br>Note that [these docs](https://ministryofjustice.github.io/hmpps-digital-prison-reporting-frontend/dashboards/definitions/dashboard-definition/) are referring to the dashboard definition response returned from the API and not the the actual DPD so there are some naming differences like for example plural being used instead of singular. For example, `sections` vs `section` which is in the DPD.
-
-## metrics
-
-TBD
 
 # Notable Features
 
@@ -437,7 +474,7 @@ For example, a "Visits by Person" report could have a mandatory non-interactive 
 - **defaultGranularity**: Sets the default granularity for the "granulardaterange" filter type. This can be hourly, daily, weekly, monthly, quarterly or annually.
 - **defaultQuickFilterValue**: Sets the default value for a quick filter. Values include today, yesterday, last-seven-days, next-year and more. The intention is either the "default" or "defaultQuickFilterValue" to be set. When this value is set, the "default" filter property must not be set. If both "defaultQuickFilterValue" and "default" are set "defaultQuickFilterValue" will take precedence.
 
-## Parent-Child Template
+## Template type: 'parent-child'
 
 In order to use the parent-child template, two things need to be in place:
 - The report's template should be set to `parent-child`.
@@ -447,7 +484,7 @@ Optionally, the child report's `render` property can be set to `HTML-child` to p
 
 Once the above are in place, the relevant information will be sent to the UI for it to render the report.
 
-## parent-child-section Template
+## Template type: 'parent-child-section'
 
 This is a combination of a sectioned [report](#report) and a [parent-child](#Parent-Child-Template).
 In order to use this template: 
