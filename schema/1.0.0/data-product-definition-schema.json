@@ -538,7 +538,8 @@
       "properties": {
         "name": { "type": "string" },
         "header": { "type": "boolean" },
-        "mergeRows": { "type": "boolean" }
+        "mergeRows": { "type": "boolean" },
+        "defaultsort": { "type": "boolean" }
       }
     },
 
