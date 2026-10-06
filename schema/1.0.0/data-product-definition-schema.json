@@ -466,7 +466,6 @@
     },
 
     "report-field": {
-      "type": "object",
       "required": ["name"],
       "properties": {
         "description": { "type": "string" },
