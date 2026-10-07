@@ -444,8 +444,7 @@
         "required": ["type"],
         "properties": {
           "type": { "enum": ["print"] }
-        },
-        "additionalProperties": false
+        }
       }
     },
 
