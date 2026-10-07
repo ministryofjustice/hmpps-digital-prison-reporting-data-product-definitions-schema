@@ -432,7 +432,19 @@
         "classification": { "type": "string" },
         "specification": { "$ref": "#/definitions/report-specification" },
         "summary": { "type": "array", "items": { "$ref": "#/definitions/report-summary" } },
-        "child": { "type": "array", "items": { "$ref": "#/definitions/report-child" } }
+        "child": { "type": "array", "items": { "$ref": "#/definitions/report-child" } },
+        "feature": {"$ref": "#/definitions/report-feature"}
+      }
+    },
+
+    "report-feature": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": { "enum": ["print"] }
+        }
       }
     },
 
