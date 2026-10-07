@@ -438,10 +438,14 @@
     },
 
     "report-feature": {
-      "type": "object",
-      "required": ["type"],
-      "properties": {
-        "type": { "enum": ["print"] }
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type": { "enum": ["print"] }
+        },
+        "additionalProperties": false
       }
     },
 
