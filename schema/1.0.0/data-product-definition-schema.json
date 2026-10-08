@@ -30,10 +30,6 @@
     "report": {
       "type": "array",
       "items": { "$ref": "#/definitions/report" }
-    },
-    "errors": {
-      "type": "array",
-      "items": { "$ref": "#/definitions/error" }
     }
   },
 
@@ -551,15 +547,6 @@
         "header": { "type": "boolean" },
         "mergeRows": { "type": "boolean" },
         "defaultsort": { "type": "boolean" }
-      }
-    },
-
-    "error": { "type": "object",
-      "properties": {
-        "type": { "type": "string" },
-        "error": { "type": "string" },
-        "entityId": { "type": "string" },
-        "entityType": { "type": "string" }
       }
     },
 
