@@ -210,7 +210,7 @@
         "description": {"type": "string"},
         "column": {
           "type": "object",
-          "required": ["measure"],
+          "required": ["measure", "expectNull"],
           "properties": {
             "key": {
               "type": "array",
