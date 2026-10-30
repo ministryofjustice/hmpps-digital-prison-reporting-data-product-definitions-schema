@@ -479,8 +479,7 @@
         "defaultsort": { "type": "boolean" },
         "sortdirection": { "enum": ["asc", "desc"] },
         "wordwrap": { "enum": ["none", "normal", "break-words"] },
-        "filter": { "$ref": "#/definitions/filter" },
-        "type": { "enum": ["boolean", "int", "long", "float", "double", "string", "date", "time", "datetime", "timestamp"] }
+        "filter": { "$ref": "#/definitions/filter" }
       },
       "additionalProperties": true
     },

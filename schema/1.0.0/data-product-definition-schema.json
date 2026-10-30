@@ -487,7 +487,6 @@
         "wordwrap": { "enum": ["none", "normal", "break-words"] },
         "alias": { "$ref": "#/definitions/alias" },
         "filter": { "$ref": "#/definitions/filter" },
-        "type": { "enum": ["boolean", "int", "long", "float", "double", "string", "date", "time", "datetime", "timestamp"] },
         "header": { "type": "boolean" }
       },
       "additionalProperties": true
