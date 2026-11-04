@@ -59,7 +59,7 @@
         "database": { "type": "string" },
         "catalog": { "type": "string" }
       },
-      "additionalProperties": true
+      "additionalProperties": false
     },
 
     "dataset": {
@@ -108,9 +108,10 @@
         "name": { "type": "string" },
         "display": { "type": "string" },
         "type": { "enum": ["null", "boolean", "int", "long", "float", "double", "bytes", "string", "date", "time", "datetime", "timestamp"] },
-        "filter": { "$ref": "#/definitions/filter" }
+        "filter": { "$ref": "#/definitions/filter" },
+        "formula": { "type": "string" }
       },
-      "additionalProperties": true
+      "additionalProperties": false
     },
 
     "dataset-parameter": {
@@ -127,7 +128,7 @@
         "reportFieldType": { "enum": ["null", "boolean", "int", "long", "float", "double", "bytes", "string", "date", "time", "datetime", "timestamp"] },
         "referenceType": { "enum": ["establishment", "alert", "wing"] }
       },
-      "additionalProperties": true
+      "additionalProperties": false
     },
 
     "dashboard": {
@@ -481,7 +482,7 @@
         "wordwrap": { "enum": ["none", "normal", "break-words"] },
         "filter": { "$ref": "#/definitions/filter" }
       },
-      "additionalProperties": true
+      "additionalProperties": false
     },
 
     "sensitivity": {
