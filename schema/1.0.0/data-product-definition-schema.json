@@ -105,7 +105,8 @@
         "alias": { "$ref": "#/definitions/alias" },
         "tags": { "$ref": "#/definitions/tags" },
         "type": { "enum": ["null", "boolean", "int", "long", "float", "double", "bytes", "string", "date", "time", "datetime", "timestamp"] },
-        "filter": { "$ref": "#/definitions/filter" }
+        "filter": { "$ref": "#/definitions/filter" },
+        "formula": { "type": "string" }
       },
       "additionalProperties": true
     },
