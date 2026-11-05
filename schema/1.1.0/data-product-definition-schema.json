@@ -322,7 +322,8 @@
             "next-year",
             "next-full-year"
           ]
-        }
+        },
+        "hint": {"type": "string"}
       }
     },
 
