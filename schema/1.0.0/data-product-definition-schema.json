@@ -262,7 +262,7 @@
       "properties": {
         "min": {"type": "number"},
         "max": {"type": "number"},
-        "hexColour": {"type": "boolean"}
+        "hexColour": {"type": "string"}
       }
     },
 
