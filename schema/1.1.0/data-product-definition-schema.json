@@ -145,7 +145,7 @@
           "items": { "$ref": "#/definitions/dashboard-section-definition" }
         },
         "filter": { "$ref": "#/definitions/report-filter" },
-        "child" : { "$ref": "#/definitions/dashboard-child" }
+        "child" : {"type": "array", "items":{ "$ref": "#/definitions/dashboard-child" } }
       }
     },
 
