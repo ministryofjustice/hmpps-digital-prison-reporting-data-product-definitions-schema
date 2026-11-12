@@ -275,7 +275,7 @@
         "pattern": { "type": "string" },
         "mandatory": { "type": "boolean" },
         "staticoptions": { "$ref": "#/definitions/static-options" },
-        "dynamicOptions": {"$ref": "#/definitions/dynamic-options" },
+        "dynamicoptions": {"$ref": "#/definitions/dynamic-options" },
         "min": { "type": "string" },
         "max": { "type": "string" },
         "minSelected": {"type":  "integer"},
