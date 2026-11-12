@@ -239,7 +239,7 @@
       "required": ["id", "equals"],
       "properties": {
         "id": {"type": "string"},
-        "equals": {"type": "string"}
+        "equals": {"type": ["string", "null"] }
       }
     },
 

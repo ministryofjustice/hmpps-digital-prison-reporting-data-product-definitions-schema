@@ -251,7 +251,7 @@
       "required": ["id"],
       "properties": {
         "id": {"type": "string"},
-        "equals": {"type": "string"}
+        "equals": {"type": ["string", "null"] }
       }
     },
 
