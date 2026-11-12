@@ -123,7 +123,7 @@
         "display": { "type": "string" },
         "index": { "type": "integer" },
         "name": { "type": "string" },
-        "mandatory": { "enum": ["true", "false"] },
+        "mandatory": { "type": "boolean" },
         "filterType": { "type": "string" },
         "reportFieldType": { "enum": ["null", "boolean", "int", "long", "float", "double", "bytes", "string", "date", "time", "datetime", "timestamp"] },
         "referenceType": { "enum": ["establishment", "alert", "wing"] }
@@ -248,10 +248,10 @@
 
     "value-visualisation-column": {
       "type": "object",
-      "required": ["id"],
+      "required": ["id", "equals"],
       "properties": {
         "id": {"type": "string"},
-        "equals": {"type": "string"}
+        "equals": {"type": ["string", "null"] }
       }
     },
 
