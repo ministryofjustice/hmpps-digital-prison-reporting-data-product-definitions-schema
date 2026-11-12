@@ -248,7 +248,7 @@
 
     "value-visualisation-column": {
       "type": "object",
-      "required": ["id"],
+      "required": ["id", "equals"],
       "properties": {
         "id": {"type": "string"},
         "equals": {"type": ["string", "null"] }
