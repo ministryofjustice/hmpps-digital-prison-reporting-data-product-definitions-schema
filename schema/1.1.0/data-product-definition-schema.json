@@ -334,6 +334,7 @@
         "author": { "type": "string" },
         "version": { "type": "string" },
         "owner": { "type": "string" },
+        "datasource": { "type": "string" },
         "tags": { "$ref": "#/definitions/tags" }
       },
       "additionalProperties": false

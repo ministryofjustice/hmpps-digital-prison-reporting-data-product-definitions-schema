@@ -62,6 +62,9 @@
         "owner": {
           "type": "string"
         },
+        "datasource": {
+          "type": "string"
+        },
         "tags": {
           "$ref": "#/definitions/tags"
         }
