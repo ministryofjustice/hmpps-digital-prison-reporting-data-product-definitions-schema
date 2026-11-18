@@ -329,7 +329,7 @@
 
     "metadata": {
       "type": "object",
-      "required": ["version"],
+      "required": ["author","version", "owner"],
       "properties": {
         "author": { "type": "string" },
         "version": { "type": "string" },
