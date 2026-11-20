@@ -98,7 +98,8 @@
             }
           }
         }
-      }
+      },
+      "additionalProperties": false
     },
 
     "dataset-field": {
@@ -244,7 +245,8 @@
         "displayValue": {"type": "boolean"},
         "axis": {"type": "string"},
         "optional": {"type": "boolean"}
-      }
+      },
+      "additionalProperties": false
     },
 
     "value-visualisation-column": {
@@ -419,7 +421,8 @@
         "summary": { "type": "array", "items": { "$ref": "#/definitions/report-summary" } },
         "child": { "type": "array", "items": { "$ref": "#/definitions/report-child" } },
         "feature": {"$ref": "#/definitions/report-feature"}
-      }
+      },
+      "additionalProperties": false
     },
 
     "report-metadata": {
