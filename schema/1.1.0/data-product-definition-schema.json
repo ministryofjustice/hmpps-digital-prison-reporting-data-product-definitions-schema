@@ -264,7 +264,7 @@
       "properties": {
         "useRagColour": {"type": "boolean", "default": false },
         "baseColour": {"type": "string"},
-        "buckets": {
+        "bucket": {
           "type": "array",
           "items": { "$ref": "#/definitions/dashboard-visualisation-option-bucket" }
         },
