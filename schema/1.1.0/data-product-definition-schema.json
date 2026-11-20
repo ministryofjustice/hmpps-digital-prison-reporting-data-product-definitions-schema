@@ -145,7 +145,8 @@
           "items": { "$ref": "#/definitions/dashboard-section-definition" }
         },
         "filter": { "$ref": "#/definitions/report-filter" },
-        "child" : {"type": "array", "items":{ "$ref": "#/definitions/dashboard-child" } }
+        "child" : {"type": "array", "items":{ "$ref": "#/definitions/dashboard-child" } },
+        "metadata":  { "$ref": "#/definitions/dashboard-metadata" }
       }
     },
 
@@ -334,7 +335,6 @@
         "author": { "type": "string" },
         "version": { "type": "string" },
         "owner": { "type": "string" },
-        "datasource": { "type": "string" },
         "tags": { "$ref": "#/definitions/tags" }
       },
       "additionalProperties": false
@@ -564,6 +564,12 @@
           "type": "array",
           "items": { "$ref": "#/definitions/dataset-parameter" }
         }
+      }
+    },
+    "dashboard-metadata": {
+      "type": "object",
+      "properties": {
+        "datasource": { "type": "string" }
       }
     }
   }

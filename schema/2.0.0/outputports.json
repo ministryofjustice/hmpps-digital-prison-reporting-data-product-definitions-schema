@@ -59,7 +59,8 @@
         },
         "filter": {
           "$ref": "#/definitions/report-filter"
-        }
+        },
+        "metadata":  { "$ref": "#/definitions/dashboard-metadata" }
       }
     },
     "dashboard-section-definition": {
@@ -378,9 +379,6 @@
         "owner": {
           "type": "string"
         },
-        "datasource": {
-          "type": "string"
-        },
         "tags": {
           "$ref": "#/definitions/tags"
         }
@@ -669,6 +667,12 @@
             "type": "string"
           }
         }
+      }
+    },
+    "dashboard-metadata": {
+      "type": "object",
+      "properties": {
+        "datasource": { "type": "string" }
       }
     }
   }
