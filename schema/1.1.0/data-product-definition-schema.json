@@ -148,7 +148,8 @@
         "filter": { "$ref": "#/definitions/report-filter" },
         "child" : {"type": "array", "items":{ "$ref": "#/definitions/dashboard-child" } },
         "metadata":  { "$ref": "#/definitions/dashboard-metadata" }
-      }
+      },
+      "additionalProperties": false
     },
 
     "dashboard-section-definition": {
