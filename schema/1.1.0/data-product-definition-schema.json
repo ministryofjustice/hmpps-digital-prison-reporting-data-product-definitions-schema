@@ -33,7 +33,6 @@
       "items": { "$ref": "#/definitions/report" }
     }
   },
-
   "anyOf": [
     {
       "required": ["report"]
@@ -42,9 +41,7 @@
       "required": ["dashboard"]
     }
   ],
-
   "additionalProperties": false,
-
   "definitions": {
     "alias": { "type": "array", "items": { "type": "string" } },
 
@@ -61,7 +58,6 @@
       },
       "additionalProperties": false
     },
-
     "dataset": {
       "type": "object",
       "required": ["id", "name", "datasource", "query", "schema"],
@@ -96,12 +92,12 @@
               "type": "array",
               "items": { "$ref": "#/definitions/dataset-field" }
             }
-          }
+          },
+          "additionalProperties": false
         }
       },
       "additionalProperties": false
     },
-
     "dataset-field": {
       "type": "object",
       "required": ["name", "type"],
@@ -114,7 +110,6 @@
       },
       "additionalProperties": false
     },
-
     "dataset-parameter": {
       "type": "object",
       "required": ["name", "display","reportFieldType"],
@@ -131,7 +126,6 @@
       },
       "additionalProperties": false
     },
-
     "dashboard": {
       "type": "object",
       "required": ["id", "name", "dataset", "section"],
@@ -151,7 +145,6 @@
       },
       "additionalProperties": false
     },
-
     "dashboard-section-definition": {
       "type": "object",
       "required": ["id", "display", "visualisation"],
@@ -163,16 +156,17 @@
           "type": "array",
           "items": { "$ref": "#/definitions/dashboard-visualisation" }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "dashboard-child": {
       "type": "object",
       "required": ["dashboardId"],
       "properties": {
-        "dashboardId":  { "type": "string" }
-      }
+        "dashboardId": { "type": "string" }
+      },
+      "additionalProperties": false
     },
-
     "metric": {
       "type": "object",
       "required": ["id", "name", "dataset", "display", "description", "specification"],
@@ -188,7 +182,8 @@
             "$ref": "#/definitions/metric-specification"
           }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "metric-specification": {
       "type": "object",
@@ -200,9 +195,10 @@
         "group": {"type":  "boolean"},
         "chart": {
           "type": "array",
-          "items":  { "enum": ["doughnut","bar","line"] }
+          "items": { "enum": [ "doughnut","bar","line" ] }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "dashboard-visualisation": {
       "type": "object",
@@ -228,13 +224,14 @@
               "type": "array",
               "items": { "$ref": "#/definitions/value-visualisation-column" }
             },
-            "expectNull": {"type": "boolean"}
-          }
+            "expectNull": { "type": "boolean" }
+          },
+          "additionalProperties": false
         },
         "option": { "$ref": "#/definitions/dashboard-visualisation-option" }
-      }
+      },
+      "additionalProperties": false
     },
-
     "dashboard-visualisation-column": {
       "type": "object",
       "required": ["id"],
@@ -249,16 +246,15 @@
       },
       "additionalProperties": false
     },
-
     "value-visualisation-column": {
       "type": "object",
       "required": ["id", "equals"],
       "properties": {
         "id": {"type": "string"},
         "equals": {"type": ["string", "null"] }
-      }
+      },
+      "additionalProperties": false
     },
-
     "dashboard-visualisation-option": {
       "type": "object",
       "properties": {
@@ -273,7 +269,8 @@
         "horizontal": {"type": "boolean" },
         "xStacked": {"type": "boolean" },
         "yStacked": {"type": "boolean" }
-      }
+      },
+      "additionalProperties": false
     },
 
     "dashboard-visualisation-option-bucket": {
@@ -282,7 +279,8 @@
         "min": {"type": "number"},
         "max": {"type": "number"},
         "hexColour": {"type": "string"}
-      }
+      },
+      "additionalProperties": false
     },
 
     "filter": {
@@ -328,9 +326,9 @@
           ]
         },
         "hint": {"type": "string"}
-      }
+      },
+      "additionalProperties": false
     },
-
     "metadata": {
       "type": "object",
       "required": ["author","version", "owner"],
@@ -342,7 +340,6 @@
       },
       "additionalProperties": false
     },
-
     "policy": {
       "type": "object",
       "required": ["id", "type", "rule"],
@@ -362,7 +359,6 @@
       },
       "additionalProperties": false
     },
-
     "policy-rule": {
       "type": "object",
       "required": ["effect", "condition"],
@@ -375,14 +371,12 @@
       },
       "additionalProperties": false
     },
-
     "policy-condition": {
       "anyOf": [
         { "$ref": "#/definitions/policy-condition-match" },
         { "$ref": "#/definitions/policy-condition-exists" }
       ]
     },
-
     "policy-condition-match": {
       "type": "object",
       "properties": {
@@ -390,9 +384,9 @@
           "type": "array",
           "items": { "type": "string" }
         }
-      }
+      },
+      "additionalProperties": false
     },
-
     "policy-condition-exists": {
       "type": "object",
       "properties": {
@@ -400,9 +394,9 @@
           "type": "array",
           "items": { "type": "string" }
         }
-      }
+      },
+      "additionalProperties": false
     },
-
     "report": {
       "type": "object",
       "required": ["id", "name", "version", "dataset", "render"],
@@ -425,15 +419,14 @@
       },
       "additionalProperties": false
     },
-
     "report-metadata": {
       "type": "object",
       "required": ["hints"],
       "properties": {
         "hints": { "type": "array", "items": {"type": "string", "enum": ["interactive"] } }
-      }
+      },
+      "additionalProperties": false
     },
-
     "report-feature": {
       "type": "array",
       "items": {
@@ -441,10 +434,10 @@
         "required": ["type"],
         "properties": {
           "type": { "enum": ["print"] }
-        }
+        },
+        "additionalProperties": false
       }
     },
-
     "report-filter": {
       "type": "object",
       "required": ["name", "query"],
@@ -455,7 +448,8 @@
         "database": { "type": "string" },
         "version": { "type": "string" },
         "query": { "type": "string" }
-      }
+      },
+      "additionalProperties": false
     },
 
     "report-specification": {
@@ -471,10 +465,12 @@
           "type": "array",
           "items": { "$ref": "#/definitions/report-field" }
         }
-      }
+      },
+      "additionalProperties": false
     },
 
     "report-field": {
+      "type": "object",
       "required": ["name"],
       "properties": {
         "description": { "type": "string" },
@@ -490,12 +486,10 @@
       },
       "additionalProperties": false
     },
-
     "sensitivity": {
       "enum": ["public", "private", "internal", "confidential", "restricted"],
       "default": "public"
     },
-
     "static-options": {
       "type": "array",
       "items": {
@@ -508,7 +502,6 @@
         "additionalProperties": false
       }
     },
-
     "dynamic-options": {
       "type": "object",
       "required": ["returnAsStaticOptions"],
@@ -519,7 +512,8 @@
         "dataset": { "type": "string" },
         "name": { "type": "string" },
         "display": { "type": "string" }
-      }
+      },
+      "additionalProperties": false
     },
 
     "tags": { "type": "array", "items": { "type": "string" } },
@@ -535,7 +529,8 @@
           "type": "array",
           "items": { "$ref": "#/definitions/summary-field" }
         }
-      }
+      },
+      "additionalProperties": false
     },
 
     "summary-field": {
@@ -546,7 +541,8 @@
         "header": { "type": "boolean" },
         "mergeRows": { "type": "boolean" },
         "defaultsort": { "type": "boolean" }
-      }
+      },
+      "additionalProperties": false
     },
 
     "report-child": {
@@ -555,7 +551,8 @@
       "properties": {
         "reportId": { "type": "string" },
         "joinField": { "type": "array", "items": { "type": "string" } }
-      }
+      },
+      "additionalProperties": false
     },
     "multiphaseQuery": {
       "type": "object",
@@ -568,13 +565,15 @@
           "type": "array",
           "items": { "$ref": "#/definitions/dataset-parameter" }
         }
-      }
+      },
+      "additionalProperties": false
     },
     "dashboard-metadata": {
       "type": "object",
       "properties": {
         "datasource": { "type": "string" }
-      }
+      },
+      "additionalProperties": false
     }
   }
 }
